@@ -1,179 +1,76 @@
 <!DOCTYPE html>
-<!-- DOCTYPE tells the browser "this is a modern HTML5 page" -->
-
 <html lang="en">
-<!-- lang="en" tells screen readers the page is in English -->
-
 <head>
-  <!-- HEAD: Invisible settings for the page (not shown on screen) -->
-
   <meta charset="UTF-8">
-  <!-- charset: tells the browser which characters to support (UTF-8 covers basically everything) -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- viewport: makes the page scale correctly on phones and tablets -->
-
   <title>INSPIRED</title>
-  <!-- The text shown in the browser tab -->
-
-  <!-- Google Fonts: loads our two pixel-style fonts from the internet -->
-  <!-- Jersey 15: used for all general UI text (nav, cards, banner labels) -->
-  <!-- Pixelify Sans: used for the big daily word like "CROWN" -->
   <link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Links to our CSS file — this is where all the visual styling lives -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-<!-- BODY: Everything the user actually sees on the page -->
 
-
-  <!-- ================================================
-       NAVIGATION BAR
-       <nav> is a semantic tag — it tells browsers and
-       screen readers "this is the main site menu"
-       ================================================ -->
   <nav id="main-nav">
 
-    <!-- Logo: top-left corner -->
-    <div class="nav-logo">INSPIRED &#128065;</div>
-    <!-- &#128065; is the HTML code for the 👁 eye emoji -->
+    <div class="nav-logo">
+      <img src="images\logo.png" alt="App Logo" class="header-logo">    </div>
 
-    <!-- Desktop nav links: the box with Explore / Friends / Profile -->
-    <!-- This is HIDDEN on mobile (handled in CSS) -->
     <div class="nav-links" id="desktop-links">
       <a href="#" class="nav-link active" data-section="explore" onclick="showSection('explore')">Explore</a>
       <a href="#" class="nav-link"         data-section="friends" onclick="showSection('friends')">Friends</a>
       <a href="#" class="nav-link"         data-section="profile" onclick="showSection('profile')">Profile</a>
     </div>
-    <!-- data-section="explore" is a custom label we use in JavaScript to know which link was clicked -->
 
-    <!-- About button: top-right corner -->
-    <!-- Hidden on mobile, shown on desktop -->
     <button class="about-btn" onclick="showSection('about')">About &gt;</button>
-    <!-- &gt; is the HTML code for the > character -->
 
-    <!-- Hamburger button: only visible on mobile -->
-    <!-- Shows three horizontal lines (≡) that open the mobile menu -->
     <button class="hamburger-btn" id="hamburger-btn" onclick="openMobileMenu()">&#8801;</button>
-    <!-- &#8801; is the HTML code for the ≡ hamburger icon -->
 
   </nav>
 
-
-  <!-- ================================================
-       MOBILE SLIDE-IN MENU
-       This is off-screen by default.
-       JavaScript adds the "open" class to slide it in.
-       ================================================ -->
   <div class="mobile-menu" id="mobile-menu">
-
-    <!-- X button to close the menu -->
     <button class="close-btn" onclick="closeMobileMenu()">&#10005;</button>
-    <!-- &#10005; is the HTML code for the ✕ close icon -->
-
-    <!-- Mobile versions of the nav links -->
     <a href="#" class="mobile-nav-link" onclick="showSection('explore'); closeMobileMenu()">Explore</a>
     <a href="#" class="mobile-nav-link" onclick="showSection('friends');  closeMobileMenu()">Friends</a>
     <a href="#" class="mobile-nav-link" onclick="showSection('profile');  closeMobileMenu()">Profile</a>
-
   </div>
 
-
-  <!-- ================================================
-       MAIN CONTENT AREA
-       <main> is a semantic tag — it wraps the primary
-       content of the page (not nav, not footer)
-       ================================================ -->
   <main>
-
-
-    <!-- ============================================
-         SECTION 1: EXPLORE (visible on load)
-         ============================================ -->
     <section id="section-explore" class="page-section active-section">
-    <!-- <section> is a semantic tag for a distinct chunk of content -->
-    <!-- id="section-explore" links to our CSS and JavaScript -->
-    <!-- "active-section" makes it visible (others are hidden by default) -->
-
-      <!-- Blue banner: date / big word / upload count -->
       <div class="banner">
         <span id="current-date">Loading...</span>
-        <!-- JavaScript will replace "Loading..." with today's date -->
-
         <span id="daily-word" class="pixel-word">&#8226;&#8226;&#8226;</span>
-        <!-- JavaScript will replace this with today's word (e.g. "CROWN") -->
-        <!-- &#8226; = • (used as a loading placeholder) -->
-
         <span id="upload-count">0 Uploads</span>
-        <!-- JavaScript will animate this counting up to the real number -->
       </div>
 
-      <!-- White content box -->
       <div class="section-content">
-
         <h1 class="section-title">Explore</h1>
-        <!-- h1 = the most important heading on the page -->
-
-        <!-- Gallery grid: cards are built here by JavaScript -->
         <div class="gallery-grid" id="gallery-grid">
-          <!-- JavaScript fills this in automatically from the artworkData array -->
-          <!-- See script.js → buildGallery() -->
         </div>
-
       </div>
-
     </section>
 
-
-    <!-- ============================================
-         SECTION 2: FRIENDS (placeholder for now)
-         ============================================ -->
     <section id="section-friends" class="page-section">
-
       <div class="section-content coming-soon">
         <h2>Friends</h2>
         <p>Coming soon — this will show artwork from people you follow.</p>
       </div>
-
     </section>
 
-
-    <!-- ============================================
-         SECTION 3: PROFILE (placeholder for now)
-         ============================================ -->
     <section id="section-profile" class="page-section">
-
-      <!-- This section has a form — satisfies the "user-driven interactivity" requirement -->
       <div class="section-content coming-soon">
         <h2>Profile</h2>
         <p>Coming soon — edit your profile, add and remove friends.</p>
       </div>
-
     </section>
 
-
-    <!-- ============================================
-         SECTION 4: ABOUT (placeholder for now)
-         ============================================ -->
     <section id="section-about" class="page-section">
-
       <div class="section-content coming-soon">
         <h2>About INSPIRED</h2>
         <p>Coming soon — a short description of what this site is all about.</p>
       </div>
-
     </section>
-
-
   </main>
 
-
-  <!-- JavaScript is loaded at the BOTTOM of the page on purpose -->
-  <!-- This way the HTML above fully loads first, then JS runs -->
   <script src="script.js"></script>
-
 </body>
 </html>

@@ -1,243 +1,151 @@
-/* =====================================================
-   STYLE.CSS — All the visual styling for INSPIRED
-   
-   Reading tip: CSS works like this:
-   
-     selector {
-       property: value;
-     }
-   
-   The "selector" picks which HTML elements to style.
-   The "property: value" pairs change how they look.
-   ===================================================== */
-
-
-/* =====================================================
-   CSS VARIABLES — Our Colour Palette
-   
-   Variables let us define colours ONCE at the top,
-   then reuse them anywhere with var(--name).
-   Change a colour here and it updates everywhere!
-   ===================================================== */
 :root {
-  /* :root means "apply these to the whole document" */
-
-  --gray:       #c0c0c0;   /* Classic Windows 95 silver-gray */
-  --dark-gray:  #808080;   /* Darker gray, used for shadow borders */
-  --white:      #ffffff;   /* Pure white, used for highlight borders */
-  --black:      #000000;   /* Text colour */
-  --banner-bg:  #a8c4dc;   /* The light blue of the header banner */
-  --blue-btn:   #1a5fb4;   /* The "About" button blue */
-  --content-bg: #ffffff;   /* White background of the content area */
-  --card-hover: #264b8a;   /* Border colour when hovering over a card */
+  --gray:       #c0c0c0;   
+  --dark-gray:  #808080;   
+  --white:      #ffffff;   
+  --black:      #000000;   
+  --banner-bg:  #2b6cb0;   
+  --blue-btn:   #1a5fb4;   
+  --content-bg: #ffffff;   
+  --card-hover: #264b8a;   
 }
 
-
-/* =====================================================
-   RESET
-   
-   Browsers add default margins and padding.
-   This removes them so we start from a clean slate.
-   ===================================================== */
 * {
-  /* * means "apply to EVERY element on the page" */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* box-sizing: border-box makes width/height calculations simpler —
-     padding and borders are included inside the element's size */
 }
 
-
-/* =====================================================
-   BODY — The overall page
-   ===================================================== */
 body {
-  background-color: var(--gray);      /* Windows 95 silver background */
+  background-color: var(--gray);     
   font-family: 'Jersey 15', Arial, sans-serif;
-  /* 'Jersey 15' is our pixel-style UI font loaded from Google Fonts.
-     Arial is the fallback if it doesn't load. */
   color: var(--black);
   min-height: 100vh;
-  /* min-height: 100vh means "at least as tall as the browser window" */
+  font-size: 18px; /* Made the base font size slightly larger */
 }
 
-
-/* =====================================================
-   NAVIGATION BAR
-   ===================================================== */
 nav#main-nav {
-  /* nav#main-nav = the <nav> element that has id="main-nav" */
-
+  position: relative; /* Allows us to perfectly center the nav-links inside */
   display: flex;
-  /* flex = "flexbox layout" — it puts items in a row (by default)
-     and gives us easy control over spacing and alignment */
-
   align-items: center;
-  /* vertically centres all items in the nav bar */
-
   justify-content: space-between;
-  /* spreads items across the bar: logo LEFT, links CENTER, button RIGHT */
-
-  padding: 6px 16px;
-  /* padding: top/bottom  left/right
-     Adds space inside the nav bar so content isn't jammed to the edges */
-
+  padding: 16px 20px; 
   background-color: var(--gray);
-
   border-bottom: 2px solid var(--dark-gray);
-  /* A single line underneath the nav bar */
 }
 
-/* Logo text (top-left) */
 .nav-logo {
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 2px;   /* Slight spacing between letters */
-  cursor: default;       /* Normal cursor (not a pointer) — it's not a link */
-  user-select: none;     /* Stops the text from being accidentally highlighted */
+  cursor: default;       
+  user-select: none;     
 }
 
-/* The box around Explore / Friends / Profile links */
+/* Logo scaled based on your 780x200 dimensions */
+.header-logo {
+  height: 50px; /* Increased height, auto-width will make it ~195px wide */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .nav-links {
-  display: flex;          /* Puts the links in a row */
-
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* This perfectly locks it to the center */
+  display: flex;          
   border: 2px solid;
-  /* Windows 95 INSET (recessed) border effect:
-     The trick is using different colours on each side of the border.
-     top: dark, right: white, bottom: white, left: dark = looks sunken */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
-
   padding: 2px;
 }
 
-/* Individual nav link (Explore / Friends / Profile) */
 .nav-link {
-  text-decoration: none;   /* Removes the default underline on links */
+  text-decoration: none;   
   color: var(--black);
-  padding: 4px 20px;
-  font-size: 13px;
+  padding: 6px 24px; /* Slightly larger padding */
+  font-size: 16px; /* Larger text */
   display: block;
-  white-space: nowrap;     /* Stops the text from wrapping to a new line */
+  white-space: nowrap;     
   cursor: pointer;
 }
 
-/* The currently active nav link (e.g. "Explore" when on the explore page) */
 .nav-link.active {
   background-color: var(--gray);
-  /* The active link gets a slightly raised look (background = same as nav) */
 }
 
-/* When you hover over a nav link */
 .nav-link:hover {
   background-color: var(--blue-btn);
   color: var(--white);
 }
 
-/* The blue "About >" button (top-right) */
 .about-btn {
   background-color: var(--blue-btn);
   color: var(--white);
-  font-family: 'Jersey 15', Arial, sans-serif;  /* Match body font */
-  font-size: 13px;
-  padding: 5px 14px;
+  font-family: 'Jersey 15', Arial, sans-serif;  
+  font-size: 16px; /* Larger text */
+  padding: 8px 18px;
   cursor: pointer;
-
-  /* Windows 95 RAISED border effect:
-     top: white, right: dark, bottom: dark, left: white = looks raised/clickable */
   border: 2px solid;
   border-color: #6699cc var(--dark-gray) var(--dark-gray) #6699cc;
 }
 
 .about-btn:hover {
   filter: brightness(1.15);
-  /* Makes the button slightly brighter on hover */
 }
 
 .about-btn:active {
-  /* When the button is clicked, reverse the border to look "pressed" */
   border-color: var(--dark-gray) #6699cc #6699cc var(--dark-gray);
 }
 
-/* Hamburger button ≡ — only shown on mobile */
 .hamburger-btn {
   display: none;
-  /* Hidden by default. A media query at the bottom shows it on mobile. */
-
   background-color: var(--gray);
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  font-size: 22px;
-  padding: 2px 10px;
+  font-size: 26px; /* Larger hamburger menu */
+  padding: 4px 12px;
   cursor: pointer;
   line-height: 1;
   font-family: Arial, sans-serif;
 }
 
-
-/* =====================================================
-   MOBILE MENU (slide-in drawer)
-   ===================================================== */
 .mobile-menu {
   position: fixed;
-  /* fixed = stays in place even when the user scrolls */
-
   top: 0;
   left: 0;
-  /* Anchors it to the top-left corner of the screen */
-
-  width: 230px;
-  height: 100%;            /* Full height of the screen */
+  width: 260px; /* Made the mobile menu slightly wider */
+  height: 100%;            
   background-color: var(--gray);
   border-right: 3px solid var(--dark-gray);
-
   z-index: 1000;
-  /* z-index controls stacking order — higher numbers appear ON TOP of lower ones.
-     1000 ensures this menu appears above everything else on the page. */
-
-  padding: 14px;
+  padding: 16px;
   display: flex;
-  flex-direction: column;  /* Stacks items vertically (instead of in a row) */
-  gap: 10px;               /* Space between each item */
-
-  /* START OFF-SCREEN: moved 100% of its own width to the left */
+  flex-direction: column;  
+  gap: 12px;               
   transform: translateX(-100%);
-
-  /* SMOOTH SLIDE ANIMATION: when transform changes, animate it over 0.2 seconds */
   transition: transform 0.2s ease;
 }
 
-/* When JavaScript adds the "open" class, slide the menu into view */
 .mobile-menu.open {
-  transform: translateX(0);   /* Back to its normal position (on-screen) */
+  transform: translateX(0);   
 }
 
-/* The ✕ close button inside the mobile menu */
 .close-btn {
   align-self: flex-start;
-  /* Aligns only THIS item to the left (others stay stretched) */
-
   background-color: var(--gray);
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  padding: 4px 10px;
-  font-size: 14px;
+  padding: 6px 12px;
+  font-size: 16px;
   cursor: pointer;
   font-family: 'Jersey 15', Arial, sans-serif;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* Links inside the mobile menu */
 .mobile-nav-link {
   text-decoration: none;
   color: var(--black);
   display: block;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 14px;
+  font-size: 20px; /* Larger mobile text */
   text-align: center;
-
-  /* Each link looks like a raised Windows button */
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
   background-color: var(--gray);
@@ -248,60 +156,37 @@ nav#main-nav {
   color: var(--white);
 }
 
-
-/* =====================================================
-   BANNER (the blue strip with date / word / count)
-   ===================================================== */
 .banner {
   background-color: var(--banner-bg);
+  color: #ffffff; 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 14px 24px;
   border-bottom: 2px solid var(--dark-gray);
-  min-height: 80px;
-  /* min-height keeps it tall enough for the big pixel word */
+  min-height: 90px; 
 }
 
-/* Date text (left side of banner) */
 #current-date {
-  font-size: 13px;
-  font-weight: bold;
-  font-style: italic;
-  min-width: 130px;     /* Reserves space so the layout doesn't shift */
+  font-size: 16px; 
+  font-style: normal;
+  font-weight: 400;
+  min-width: 140px;     
 }
 
-/* The big pixel-art word (centre of banner, e.g. "CROWN") */
 .pixel-word {
   font-family: 'Pixelify Sans', monospace;
-  /* 'Pixelify Sans' is our pixel-art font for the big daily word */
-
-  font-size: 38px;
-  letter-spacing: 3px;
-
-  /* Text shadow: makes the word appear to have depth
-     format: horizontal-offset vertical-offset blur colour */
-  text-shadow:
-    4px 4px 0px rgba(0, 0, 0, 0.25),   /* Main shadow (dark, slightly transparent) */
-   -1px -1px 0px rgba(255,255,255,0.3); /* Slight top-left highlight */
+  font-size: 52px; 
+  letter-spacing: 4px;
 }
 
-/* Upload count (right side of banner) */
 #upload-count {
-  font-size: 13px;
-  font-weight: bold;
-  min-width: 130px;
-  text-align: right;   /* Pushes the text to the right */
+  font-size: 16px;
+  font-weight: 400;
+  min-width: 140px;
+  text-align: right;   
 }
 
-
-/* =====================================================
-   PAGE SECTIONS
-
-   All sections are hidden by default.
-   Only the section with "active-section" is shown.
-   JavaScript swaps this class when nav links are clicked.
-   ===================================================== */
 .page-section {
   display: none;
 }
@@ -310,25 +195,20 @@ nav#main-nav {
   display: block;
 }
 
-/* The white content box inside each section */
 .section-content {
   background-color: var(--content-bg);
-  margin: 12px;
-  padding: 20px;
-
-  /* Windows 95 INSET (sunken) border for the content box */
+  margin: 16px;
+  padding: 24px; /* More breathing room */
   border: 2px solid;
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
-/* Section heading (e.g. "Explore") */
 .section-title {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 18px;
+  font-size: 36px; 
+  font-weight: 400; 
+  margin-bottom: 20px;
 }
 
-/* "Coming soon" placeholder used in sections not yet built */
 .coming-soon {
   text-align: center;
   padding: 60px 20px;
@@ -336,185 +216,110 @@ nav#main-nav {
 }
 
 .coming-soon h2 {
-  font-size: 28px;
-  margin-bottom: 14px;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 16px;
 }
 
 .coming-soon p {
-  font-size: 14px;
+  font-size: 18px;
 }
 
-
-/* =====================================================
-   GALLERY GRID
-   ===================================================== */
-
-/* The 3-column grid that holds the artwork cards */
 .gallery-grid {
   display: grid;
-  /* CSS Grid: the most powerful layout tool for grids */
-
   grid-template-columns: repeat(3, 1fr);
-  /* repeat(3, 1fr) means: "3 columns, each taking 1 equal fraction of the width" */
-  /* If the grid is 900px wide, each column = 300px */
-
-  gap: 16px;
-  /* gap = space between columns AND rows */
+  gap: 18px;
 }
 
-/* Individual artwork card */
 .art-card {
   background-color: var(--white);
   overflow: hidden;
-  /* overflow: hidden clips anything that sticks out beyond the card's edges
-     (important for keeping the image inside the card) */
-
   cursor: pointer;
-
-  /* Raised Windows 95 border */
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-
-  /* Smooth transition for the hover effect below */
   transition: border-color 0.15s ease;
 }
 
 .art-card:hover {
   border-color: var(--card-hover);
-  /* Changes border colour on hover to highlight the card */
 }
 
-/* The artwork image inside the card */
 .art-card img {
   width: 100%;
-  /* Stretches the image to fill the full width of the card */
-
-  height: 270px;
-  /* Fixed height so all images are the same size regardless of the original */
-
+  height: 300px;
   object-fit: cover;
-  /* object-fit: cover fills the space while keeping the image's proportions.
-     It crops from the edges rather than stretching or squishing. */
-
   display: block;
-  /* Removes a small gap that appears below inline images by default */
 }
 
-/* Grey placeholder shown when no real image is set */
 .art-placeholder {
   width: 100%;
-  height: 270px;
+  height: 300px;
   background: linear-gradient(135deg, #999 0%, #bbb 40%, #999 100%);
-  /* linear-gradient creates a smooth colour fade.
-     135deg = diagonal direction. */
-
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Centers the label text inside the placeholder box */
-
   color: #ddd;
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 2px;
 }
 
-/* Bottom info bar of each card (username + time) */
 .art-info {
   display: flex;
   justify-content: space-between;
-  /* Puts username on the left, time on the right */
-
-  padding: 6px 10px;
+  padding: 8px 12px;
   background-color: var(--gray);
-  font-size: 11px;
+  font-size: 13px;
   border-top: 1px solid var(--dark-gray);
-}
-
-.art-username {
-  font-weight: bold;
 }
 
 .art-time {
   color: #555;
 }
 
-
-/* =====================================================
-   RESPONSIVE DESIGN — Media Queries
-
-   Media queries let us apply different CSS
-   depending on the screen size.
-
-   Think of them as: "IF the screen is this wide,
-   THEN use these styles instead."
-   ===================================================== */
-
-/* TABLET: screens 768px wide or narrower */
+/* Tablets */
 @media (max-width: 768px) {
-
-  /* Shrink the pixel word a bit */
   .pixel-word {
-    font-size: 26px;
+    font-size: 46px;
   }
-
-  /* Smaller date and count text */
   #current-date,
   #upload-count {
-    font-size: 11px;
-    min-width: 90px;
+    font-size: 14px;
+    min-width: 100px;
   }
-
 }
 
-/* MOBILE: screens 600px wide or narrower */
+/* Phones */
 @media (max-width: 600px) {
-
-  /* Hide the desktop nav links and About button */
   .nav-links,
   .about-btn {
     display: none;
   }
-
-  /* Show the hamburger ≡ button */
   .hamburger-btn {
     display: block;
   }
-
-  /* Switch from 3 columns to 2 columns */
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
-
-  /* Even smaller pixel word on small phones */
   .pixel-word {
-    font-size: 18px;
-    letter-spacing: 1px;
+    font-size: 40px; /* Kept large for mobile */
+    letter-spacing: 2px;
   }
-
-  /* Tighten the banner padding */
   .banner {
-    padding: 10px 12px;
-    min-height: 65px;
+    padding: 12px 16px;
+    min-height: 75px;
   }
-
-  /* Smaller date/count text on mobile */
   #current-date,
   #upload-count {
-    font-size: 9px;
-    min-width: 70px;
+    font-size: 12px;
+    min-width: 80px;
   }
-
-  /* Smaller card images on mobile */
   .art-card img,
   .art-placeholder {
-    height: 180px;
+    height: 200px;
   }
-
-  /* Reduce section content padding */
   .section-content {
-    margin: 8px;
-    padding: 14px;
+    margin: 10px;
+    padding: 18px;
   }
-
 }
