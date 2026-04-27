@@ -323,3 +323,116 @@ nav#main-nav {
     padding: 18px;
   }
 }
+
+/* ── LOCK SCREEN ── */
+#lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transition: opacity 0.4s ease;
+}
+
+#lock-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lock-logo {
+  width: 390px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.lock-window {
+  width: 520px;
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  background: var(--gray);
+}
+
+.lock-titlebar {
+  background: var(--banner-bg);
+  color: var(--white);
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 20px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.lock-body {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.lock-prompt {
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 22px;
+  color: var(--black);
+  align-self: flex-start;
+}
+
+.lock-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.lock-btn {
+  background: var(--gray);
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  padding: 24px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 20px;
+  color: var(--black);
+  width: 200px;
+  transition: background 0.1s;
+}
+
+.lock-btn svg {
+  width: 72px;
+  height: 72px;
+}
+
+.lock-btn:hover {
+  background: #a8a8a8;
+}
+
+.lock-btn:active {
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+}
+
+@media (max-width: 600px) {
+  .lock-logo {
+    width: 240px;
+  }
+  .lock-window {
+    width: 320px;
+  }
+  .lock-btn {
+    width: 126px;
+    font-size: 17px;
+    padding: 18px 12px;
+  }
+  .lock-btn svg {
+    width: 52px;
+    height: 52px;
+  }
+}

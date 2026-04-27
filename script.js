@@ -1,3 +1,9 @@
+function unlockSite() {
+  const lock = document.getElementById('lock-screen');
+  lock.classList.add('hidden');
+  setTimeout(() => lock.remove(), 400);
+}
+
 /* =====================================================
    SCRIPT.JS — All the interactivity for INSPIRED
 
