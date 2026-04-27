@@ -1,12 +1,13 @@
 :root {
-  --gray:       #c0c0c0;   
-  --dark-gray:  #808080;   
-  --white:      #ffffff;   
-  --black:      #000000;   
-  --banner-bg:  #2b6cb0;   
-  --blue-btn:   #7EABDE;   
-  --content-bg: #ffffff;   
-  --card-hover: #264b8a;   
+  --gray:       #c0c0c0;
+  --lighter-grey:#d9d9d9;
+  --dark-gray:  #808080;
+  --white:      #ffffff;
+  --black:      #000000;
+  --banner-bg:  #2b6cb0;
+  --blue-btn:   #80AFE1;
+  --content-bg: #ffffff;
+  --card-hover: #264b8a;
 }
 
 * {
@@ -16,31 +17,30 @@
 }
 
 body {
-  background-color: var(--gray);     
+  background-color: var(--gray);
   font-family: 'Jersey 15', Arial, sans-serif;
   color: var(--black);
   min-height: 100vh;
-  font-size: 18px; /* Made the base font size slightly larger */
+  font-size: 18px;
 }
 
 nav#main-nav {
-  position: relative; /* Allows us to perfectly center the nav-links inside */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px; 
+  padding: 22px 32px;
   background-color: var(--gray);
   border-bottom: 2px solid var(--dark-gray);
 }
 
 .nav-logo {
-  cursor: default;       
-  user-select: none;     
+  cursor: default;
+  user-select: none;
 }
 
-/* Logo scaled based on your 780x200 dimensions */
 .header-logo {
-  height: 50px; /* Increased height, auto-width will make it ~195px wide */
+  height: 70px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -49,20 +49,20 @@ nav#main-nav {
 .nav-links {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%); /* This perfectly locks it to the center */
-  display: flex;          
+  transform: translateX(-50%);
+  display: flex;
   border: 2px solid;
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   padding: 2px;
 }
 
 .nav-link {
-  text-decoration: none;   
+  text-decoration: none;
   color: var(--black);
-  padding: 6px 24px; /* Slightly larger padding */
-  font-size: 16px; /* Larger text */
+  padding: 10px 32px;
+  font-size: 25px;
   display: block;
-  white-space: nowrap;     
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -78,9 +78,9 @@ nav#main-nav {
 .about-btn {
   background-color: var(--blue-btn);
   color: var(--white);
-  font-family: 'Jersey 15', Arial, sans-serif;  
-  font-size: 16px; /* Larger text */
-  padding: 8px 18px;
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 30px;
+  padding: 10px 26px;
   cursor: pointer;
   border: 2px solid;
   border-color: #6699cc var(--dark-gray) var(--dark-gray) #6699cc;
@@ -99,7 +99,7 @@ nav#main-nav {
   background-color: var(--gray);
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  font-size: 26px; /* Larger hamburger menu */
+  font-size: 26px;
   padding: 4px 12px;
   cursor: pointer;
   line-height: 1;
@@ -110,21 +110,21 @@ nav#main-nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 260px; /* Made the mobile menu slightly wider */
-  height: 100%;            
+  width: 260px;
+  height: 100%;
   background-color: var(--gray);
   border-right: 3px solid var(--dark-gray);
   z-index: 1000;
   padding: 16px;
   display: flex;
-  flex-direction: column;  
-  gap: 12px;               
+  flex-direction: column;
+  gap: 12px;
   transform: translateX(-100%);
   transition: transform 0.2s ease;
 }
 
 .mobile-menu.open {
-  transform: translateX(0);   
+  transform: translateX(0);
 }
 
 .close-btn {
@@ -144,7 +144,7 @@ nav#main-nav {
   color: var(--black);
   display: block;
   padding: 14px;
-  font-size: 20px; /* Larger mobile text */
+  font-size: 20px;
   text-align: center;
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
@@ -158,33 +158,33 @@ nav#main-nav {
 
 .banner {
   background-color: var(--banner-bg);
-  color: #ffffff; 
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
+  padding: 20px 36px;
   border-bottom: 2px solid var(--dark-gray);
-  min-height: 90px; 
+  min-height: 110px;
 }
 
 #current-date {
-  font-size: 16px; 
+  font-size: 30px;
   font-style: normal;
   font-weight: 400;
-  min-width: 140px;     
+  min-width: 180px;
 }
 
 .pixel-word {
-  font-family: 'Pixelify Sans', monospace;
-  font-size: 52px; 
-  letter-spacing: 4px;
+  font-family: 'Jersey 15', monospace;
+  font-size: 140px;
+  letter-spacing: 3px;
 }
 
 #upload-count {
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 400;
-  min-width: 140px;
-  text-align: right;   
+  min-width: 180px;
+  text-align: right;
 }
 
 .page-section {
@@ -196,17 +196,17 @@ nav#main-nav {
 }
 
 .section-content {
-  background-color: var(--lightgray);
-  margin: 16px;
-  padding: 24px; /* More breathing room */
+  background-color: var(--lighter-grey);
+  margin: 24px;
+  padding: 32px;
   border: 2px solid;
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
 .section-title {
-  font-size: 36px; 
-  font-weight: 400; 
-  margin-bottom: 20px;
+  font-size: 60px;
+  font-weight: 400;
+  margin-bottom: 28px;
 }
 
 .coming-soon {
@@ -228,8 +228,21 @@ nav#main-nav {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 24px;
   align-items: start;
+}
+
+.art-card {
+  background-color: var(--white);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  transition: border-color 0.15s ease;
+}
+
+.art-card:hover {
+  border-color: var(--card-hover);
 }
 
 .art-card img {
@@ -254,9 +267,9 @@ nav#main-nav {
 .art-info {
   display: flex;
   justify-content: space-between;
-  padding: 8px 12px;
-  background-color: var(--blue-btn);
-  font-size: 20px;
+  padding: 12px 16px;
+  background-color: var(--gray);
+  font-size: 17px;
   border-top: 1px solid var(--dark-gray);
 }
 
@@ -267,12 +280,12 @@ nav#main-nav {
 /* Tablets */
 @media (max-width: 768px) {
   .pixel-word {
-    font-size: 46px;
+    font-size: 56px;
   }
   #current-date,
   #upload-count {
-    font-size: 14px;
-    min-width: 100px;
+    font-size: 18px;
+    min-width: 120px;
   }
 }
 
@@ -287,28 +300,28 @@ nav#main-nav {
   }
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 16px;
   }
   .pixel-word {
-    font-size: 40px; /* Kept large for mobile */
-    letter-spacing: 2px;
+    font-size: 48px;
+    letter-spacing: 3px;
   }
   .banner {
-    padding: 12px 16px;
-    min-height: 75px;
+    padding: 16px 20px;
+    min-height: 90px;
   }
   #current-date,
   #upload-count {
-    font-size: 12px;
-    min-width: 80px;
+    font-size: 14px;
+    min-width: 90px;
   }
   .art-card img,
   .art-placeholder {
     height: auto;
   }
   .section-content {
-    margin: 10px;
-    padding: 18px;
+    margin: 14px;
+    padding: 22px;
   }
 }
 
@@ -318,7 +331,7 @@ nav#main-nav {
   inset: 0;
   z-index: 9999;
   background: rgba(20, 20, 20, 0.85);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -399,6 +412,12 @@ nav#main-nav {
   height: 72px;
 }
 
+.lock-btn img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
 .lock-btn:hover {
   background: #a8a8a8;
 }
@@ -419,7 +438,8 @@ nav#main-nav {
     font-size: 17px;
     padding: 18px 12px;
   }
-  .lock-btn svg {
+  .lock-btn svg,
+  .lock-btn img {
     width: 52px;
     height: 52px;
   }
