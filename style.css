@@ -4,7 +4,7 @@
   --white:      #ffffff;   
   --black:      #000000;   
   --banner-bg:  #2b6cb0;   
-  --blue-btn:   #1a5fb4;   
+  --blue-btn:   #7EABDE;   
   --content-bg: #ffffff;   
   --card-hover: #264b8a;   
 }
@@ -196,7 +196,7 @@ nav#main-nav {
 }
 
 .section-content {
-  background-color: var(--content-bg);
+  background-color: var(--lightgray);
   margin: 16px;
   padding: 24px; /* More breathing room */
   border: 2px solid;
@@ -229,31 +229,19 @@ nav#main-nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-}
-
-.art-card {
-  background-color: var(--white);
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid;
-  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  transition: border-color 0.15s ease;
-}
-
-.art-card:hover {
-  border-color: var(--card-hover);
+  align-items: start;
 }
 
 .art-card img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  height: auto;
   display: block;
+  object-fit: contain;
 }
 
 .art-placeholder {
   width: 100%;
-  height: 300px;
+  aspect-ratio: 3 / 4;
   background: linear-gradient(135deg, #999 0%, #bbb 40%, #999 100%);
   display: flex;
   align-items: center;
@@ -267,8 +255,8 @@ nav#main-nav {
   display: flex;
   justify-content: space-between;
   padding: 8px 12px;
-  background-color: var(--gray);
-  font-size: 13px;
+  background-color: var(--blue-btn);
+  font-size: 20px;
   border-top: 1px solid var(--dark-gray);
 }
 
@@ -316,7 +304,7 @@ nav#main-nav {
   }
   .art-card img,
   .art-placeholder {
-    height: 200px;
+    height: auto;
   }
   .section-content {
     margin: 10px;

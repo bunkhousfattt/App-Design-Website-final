@@ -227,33 +227,33 @@ var artworkData = [
   {
     username: 'Just-Passing-Thru737',
     time: '2 hours ago',
-    imageSrc: ''   // Leave empty to show a placeholder box.
+    imageSrc: 'images/OTHERjustpassing.png'   // Leave empty to show a placeholder box.
                    // To use a real image: 'images/artwork1.jpg'
   },
   {
     username: 'inkman82',
     time: '34 minutes ago',
-    imageSrc: ''
+    imageSrc: 'images/inkman.png'
   },
   {
     username: 'ezuntimmy',
     time: '5 hours ago',
-    imageSrc: ''
+    imageSrc: 'images/ezu.png'
   },
   {
     username: 'Just-Passing-Thru737',
     time: '2 hours ago',
-    imageSrc: ''
+    imageSrc: 'images/justpassing.png'
   },
   {
     username: 'inkman82',
     time: '23 minutes ago',
-    imageSrc: ''
+    imageSrc: 'images/OTHERinkman.png'
   },
   {
     username: 'ezuntimmy',
     time: '5 hours ago',
-    imageSrc: ''
+    imageSrc: 'images/OTHERez.png'
   }
 ];
 
