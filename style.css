@@ -1,10 +1,19 @@
 /* =====================================================
    STYLE.CSS — All the visual styling for INSPIRED
+   
+   CSS works like this:
+     selector { property: value; }
+   
+   The selector picks which HTML element(s) to style.
+   The property/value pairs change how they look.
    ===================================================== */
 
 
 /* =====================================================
    CSS VARIABLES — Our Colour Palette
+   
+   Define colours once here, reuse them everywhere
+   with var(--name). Change one value = updates everywhere.
    ===================================================== */
 :root {
   --gray:         #c0c0c0;   /* Windows 95 silver — page background, nav bar */
@@ -20,11 +29,16 @@
 
 /* =====================================================
    RESET — Remove browser defaults
+   Browsers add their own spacing. This clears it so
+   we start from scratch.
    ===================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* box-sizing: border-box means padding/border are
+     included in an element's width, not added on top.
+     Makes sizing much more predictable. */
 }
 
 
@@ -34,8 +48,11 @@
 body {
   background-color: var(--gray);
   font-family: 'Jersey 15', Arial, sans-serif;
+  /* 'Jersey 15' loads from Google Fonts.
+     Arial is the fallback if it doesn't load. */
   color: var(--black);
   min-height: 100vh;
+  /* 100vh = 100% of the visible browser window height */
   font-size: 18px;
 }
 
@@ -45,9 +62,16 @@ body {
    ===================================================== */
 nav#main-nav {
   position: relative;
+  /* position: relative lets child elements use
+     position: absolute relative to this nav bar.
+     That's how we get the links perfectly centred. */
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* space-between: logo on left, About button on right.
+     The links sit absolutely in the middle (see .nav-links). */
+
   padding: 22px 32px;
   background-color: var(--gray);
   border-bottom: 2px solid var(--dark-gray);
@@ -57,36 +81,45 @@ nav#main-nav {
 .nav-logo {
   cursor: default;
   user-select: none;
+  /* user-select: none prevents accidentally highlighting/selecting the logo */
 }
 
 /* The actual logo image */
 .header-logo {
-  height: 70px;
-  width: auto;
+  height: 70px;    /* Controls how tall it appears */
+  width: auto;     /* Keeps the original proportions */
   object-fit: contain;
-  display: block;
+  display: block;  /* Removes a tiny gap below inline images */
 }
 
-/* The Explore / Friends / Profile box */
+/* The Explore / Friends / Profile box
+   Uses absolute positioning to sit exactly in the centre
+   of the nav regardless of what's on the left or right. */
 .nav-links {
   position: absolute;
+  /* absolute = positioned relative to the nearest parent
+     that has position: relative — which is nav#main-nav */
   left: 50%;
   transform: translateX(-50%);
+  /* left: 50% moves the LEFT EDGE to the centre.
+     translateX(-50%) then shifts it back left by half
+     its own width — so the CENTRE of the box is centred. */
+
   display: flex;
   border: 2px solid;
-  /* Windows 95 INSET border */
+  /* Windows 95 INSET border: top/left dark, bottom/right white = looks recessed */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   padding: 2px;
 }
 
 /* Individual nav link */
 .nav-link {
-  text-decoration: none;
+  text-decoration: none;   /* Remove underline from links */
   color: var(--black);
   padding: 10px 32px;
   font-size: 25px;
   display: block;
-  white-space: nowrap;
+  white-space: nowrap;     /* Don't wrap text onto a new line */
   cursor: pointer;
 }
 
@@ -109,15 +142,17 @@ nav#main-nav {
   padding: 10px 26px;
   cursor: pointer;
   border: 2px solid;
-  /* Windows 95 RAISED border */
+  /* Windows 95 RAISED border: top/left white, bottom/right dark = looks clickable */
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
 }
 
 .about-btn:hover {
   filter: brightness(1.15);
+  /* Makes the button slightly brighter on hover */
 }
 
 .about-btn:active {
+  /* When clicked, flip the border to look "pressed in" */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
@@ -137,27 +172,33 @@ nav#main-nav {
 
 /* =====================================================
    MOBILE SLIDE-IN MENU
+   Off-screen by default. JavaScript adds "open" class
+   to slide it in. CSS handles the animation.
    ===================================================== */
 .mobile-menu {
-  position: fixed;
+  position: fixed;   /* Stays put even when the user scrolls */
   top: 0;
-  left: 0;
+  right: 0;
   width: 260px;
-  height: 100%;
+  height: 100%;      /* Full screen height */
   background-color: var(--gray);
   border-right: 3px solid var(--dark-gray);
   z-index: 1000;
+  /* z-index: things with higher numbers appear on top.
+     1000 ensures the menu floats over all page content. */
   padding: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transform: translateX(-100%);
+  flex-direction: column;   /* Stack items vertically */
+  gap: 12px;                /* Space between items */
+  transform: translateX(100%);
+  /* Starts 100% of its own width to the LEFT — off screen */
   transition: transform 0.2s ease;
+  /* When transform changes, animate it over 0.2 seconds */
 }
 
 /* JavaScript adds this class to slide the menu into view */
 .mobile-menu.open {
-  transform: translateX(0);
+  transform: translateX(0);   /* Slides to its normal on-screen position */
 }
 
 /* The ✕ close button */
@@ -197,7 +238,7 @@ nav#main-nav {
    ===================================================== */
 .banner {
   background-color: var(--banner-bg);
-  color: var(--white);
+  color: var(--white);  /* All text inside is white */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -211,6 +252,8 @@ nav#main-nav {
   font-size: 30px;
   font-weight: 400;
   min-width: 180px;
+  /* min-width stops the layout from shifting when the
+     date text changes length slightly */
 }
 
 /* The big daily prompt word (centre) */
@@ -232,6 +275,9 @@ nav#main-nav {
 
 /* =====================================================
    PAGE SECTIONS
+   
+   All sections are hidden by default (display: none).
+   JavaScript adds "active-section" to show one.
    ===================================================== */
 .page-section {
   display: none;
@@ -247,7 +293,7 @@ nav#main-nav {
   margin: 24px;
   padding: 32px;
   border: 2px solid;
-  /* INSET border */
+  /* INSET border — slightly sunken look */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
@@ -265,14 +311,18 @@ nav#main-nav {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  /* 3 equal columns. 1fr = "one fraction of available space" */
+  gap: 24px;         /* Space between ALL cards */
   align-items: start;
+  /* align-items: start means tall images don't stretch
+     their neighbours — each card is only as tall as it needs */
 }
 
 /* Individual art card */
 .art-card {
   background-color: var(--white);
   overflow: hidden;
+  /* Clips the image to stay inside the card border */
   cursor: pointer;
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
@@ -286,7 +336,7 @@ nav#main-nav {
 /* Image inside the card */
 .art-card img {
   width: 100%;
-  height: auto;
+  height: auto;      /* Height scales with the image's natural proportions */
   display: block;
   object-fit: contain;
 }
@@ -295,6 +345,8 @@ nav#main-nav {
 .art-placeholder {
   width: 100%;
   aspect-ratio: 3 / 4;
+  /* aspect-ratio keeps it a consistent portrait shape
+     regardless of how wide the column is */
   background: linear-gradient(135deg, #999 0%, #bbb 40%, #999 100%);
   display: flex;
   align-items: center;
@@ -314,26 +366,27 @@ nav#main-nav {
   border-top: 1px solid var(--dark-gray);
 }
 
-.art-username { font-weight: bold; }
 .art-time     { color: #555; }
 
 
 /* =====================================================
    FRIENDS PAGE — Single centred column of posts
-
+   
    Unlike Explore's 3-column grid, Friends shows one
    card at a time, centred in the page.
    ===================================================== */
 .friends-feed {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
+  flex-direction: column;  /* Stack cards vertically */
+  align-items: center;     /* Centre each card horizontally */
+  gap: 28px;               /* Space between cards */
 }
 
 /* A single friend post card */
 .friend-card {
   width: 55%;
+  /* Cards take up 55% of the content box — centred by
+     the align-items: center on .friends-feed */
   background-color: var(--white);
   overflow: hidden;
   cursor: pointer;
@@ -393,13 +446,19 @@ nav#main-nav {
   color: var(--black);
   position: relative;
   bottom: -2px;
+  /* bottom: -2px overlaps the tab slightly onto the panel
+     below it — the classic browser-tab visual trick */
 }
 
 /* The currently selected tab */
 .profile-tab.active-tab {
   background-color: var(--lighter-grey);
   border-bottom-color: var(--lighter-grey);
+  /* Making the bottom border match the background "removes"
+     it, connecting the tab visually to the panel below */
   z-index: 1;
+  /* z-index: 1 brings the active tab in front of the panel
+     border so the bottom line disappears cleanly */
 }
 
 .profile-tab:hover:not(.active-tab) {
@@ -472,6 +531,7 @@ nav#main-nav {
   cursor: pointer;
   text-decoration: underline;
   color: #00a;
+  /* Underline + blue = classic hyperlink style hint */
 }
 
 .clickable-value:hover {
@@ -506,6 +566,7 @@ nav#main-nav {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  /* 7 equal columns — one per day of the week */
   gap: 4px;
   text-align: center;
 }
@@ -582,7 +643,7 @@ nav#main-nav {
 /* Feedback text after adding a friend */
 .friend-feedback {
   font-size: 18px;
-  min-height: 24px;
+  min-height: 24px;  /* Reserves space so the layout doesn't jump */
 }
 
 /* =====================================================
@@ -596,7 +657,7 @@ nav#main-nav {
   padding: 8px 12px;
   background-color: var(--white);
   border: 2px solid;
-  /* INSET border */
+  /* INSET border — looks sunken, like a text field should */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   color: var(--black);
   width: 100%;
@@ -605,11 +666,14 @@ nav#main-nav {
 .win95-input:focus {
   outline: none;
   border-color: var(--card-hover) var(--white) var(--white) var(--card-hover);
+  /* Blue border on focus so the user knows it's active */
 }
 
 /* Multi-line textarea (bio field) */
 .win95-textarea {
   resize: vertical;
+  /* resize: vertical lets the user drag to make it taller,
+     but not wider (width is controlled by the layout) */
   min-height: 90px;
 }
 
@@ -632,6 +696,7 @@ nav#main-nav {
 }
 
 .win95-btn:active {
+  /* Flip border to look pressed */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
@@ -663,6 +728,7 @@ nav#main-nav {
 .save-btn {
   margin-top: 8px;
   align-self: flex-start;
+  /* align-self: flex-start stops it stretching full width */
 }
 
 /* Confirmation text after saving */
@@ -715,102 +781,158 @@ nav#main-nav {
 
 /* =====================================================
    LOCK SCREEN
+   
+   position: fixed + inset: 0 = covers the ENTIRE screen.
+   z-index: 9999 = appears above everything.
+   JavaScript fades it out and removes it on upload click.
    ===================================================== */
 #lock-screen {
   position: fixed;
   inset: 0;
+  /* inset: 0 is shorthand for top:0; right:0; bottom:0; left:0 */
   z-index: 9999;
-  background: rgba(20, 20, 20, 0.85);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.88);
+  /* Dark blue-grey tint — matches the blurred site behind it */
+  backdrop-filter: blur(18px);
+  /* Blurs whatever is visible behind the overlay */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 20px;
   transition: opacity 0.4s ease;
+  /* Smooth fade when JavaScript adds the "hidden" class */
 }
 
-/* When JavaScript adds "hidden" — fade it out */
+/* When JavaScript adds "hidden" — fade out */
 #lock-screen.hidden {
   opacity: 0;
   pointer-events: none;
+  /* pointer-events: none = invisible to mouse clicks
+     so the page behind is usable immediately */
 }
 
-/* The big logo at the top of the lock screen */
-.lock-logo {
-  width: 390px;
-  height: auto;
-  image-rendering: pixelated;
-}
-
-/* The Windows 95-style dialog box */
-.lock-window {
-  width: 520px;
-  border: 2px solid;
-  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  background: var(--gray);
-}
-
-/* The blue title bar of the dialog */
-.lock-titlebar {
-  background: var(--banner-bg);
+/* "INSPIRED 👁" text above the dialog window */
+.lock-logo-text {
   color: var(--white);
   font-family: 'Jersey 15', Arial, sans-serif;
-  font-size: 20px;
-  padding: 6px 10px;
+  font-size: 42px;
+  letter-spacing: 3px;
   user-select: none;
 }
 
-/* Inside the dialog box */
-.lock-body {
-  padding: 28px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-/* The two upload buttons side by side */
-.lock-buttons {
-  display: flex;
-  gap: 20px;
-}
-
-/* Each upload option button */
-.lock-btn {
+/* The main dialog window */
+.lock-window {
+  width: 500px;
   background: var(--gray);
   border: 2px solid;
+  /* RAISED border — the window looks lifted off the dark background */
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
-  padding: 24px 20px;
-  cursor: pointer;
+  overflow: hidden;
+  /* overflow: hidden clips the blue word bar flush to the window edges */
+}
+
+/* Grey title bar: "Upload to see posts" */
+.lock-titlebar {
+  background-color: var(--lighter-grey);
+  color: var(--black);
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 26px;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--dark-gray);
+  user-select: none;
+}
+
+/* Slightly lighter sub-bar: "Create your art based on the word" */
+.lock-subtitle {
+  background-color: #e8e8e8;
+  color: var(--black);
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 18px;
+  padding: 8px 18px;
+  text-align: center;
+  border-bottom: 2px solid var(--dark-gray);
+}
+
+/* Blue strip showing today's daily word */
+.lock-word-bar {
+  background-color: var(--banner-bg);
+  padding: 12px 0;
+  text-align: center;
+  border-bottom: 2px solid var(--dark-gray);
+}
+
+/* The big word inside the blue strip (e.g. "CROWN") */
+.lock-pixel-word {
+  font-family: 'Jersey 15', monospace;
+  font-size: 80px;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 4px;
+}
+
+/* Body area: the two upload options side by side */
+.lock-body {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px 28px 28px;
+}
+
+/* Each upload column: label on top, square icon button below */
+.lock-option {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+}
+
+/* "From Library" / "Take Photo" labels */
+.lock-option-label {
   font-family: 'Jersey 15', Arial, sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   color: var(--black);
-  width: 200px;
+}
+
+/* Large square icon-only button */
+.lock-icon-btn {
+  width: 180px;
+  height: 180px;
+  background-color: var(--gray);
+  border: 2px solid;
+  /* INSET border = looks like a recessed panel / tray */
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background 0.1s;
 }
 
-.lock-btn img {
-  width: 72px;
-  height: 72px;
+.lock-icon-btn img {
+  width: 90px;
+  height: 90px;
   object-fit: contain;
+  image-rendering: pixelated;
+  /* Keeps pixel-art icons crisp when scaled up */
 }
 
-.lock-btn:hover {
-  background: #a8a8a8;
+.lock-icon-btn:hover {
+  background-color: #b0b0b0;
 }
 
-.lock-btn:active {
-  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+.lock-icon-btn:active {
+  /* Flip border to look pressed in when clicked */
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
 }
 
 
 /* =====================================================
    RESPONSIVE DESIGN — Media Queries
+   
+   "IF the screen is this wide, THEN use these styles."
+   We write mobile overrides at the bottom so they
+   take priority over the desktop styles above.
    ===================================================== */
 
 /* TABLET: 768px wide or narrower */
@@ -890,23 +1012,34 @@ nav#main-nav {
   }
 
   /* Lock screen adjusts for small screens */
-  .lock-logo {
-    width: 240px;
+  .lock-logo-text {
+    font-size: 28px;
   }
 
   .lock-window {
-    width: 320px;
+    width: 310px;
   }
 
-  .lock-btn {
-    width: 126px;
+  .lock-pixel-word {
+    font-size: 52px;
+  }
+
+  .lock-titlebar {
+    font-size: 20px;
+  }
+
+  .lock-option-label {
     font-size: 17px;
-    padding: 18px 12px;
   }
 
-  .lock-btn img {
-    width: 52px;
-    height: 52px;
+  .lock-icon-btn {
+    width: 110px;
+    height: 110px;
+  }
+
+  .lock-icon-btn img {
+    width: 56px;
+    height: 56px;
   }
 
 }

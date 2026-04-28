@@ -169,6 +169,13 @@ function setupBanner() {
 
   document.getElementById('daily-word').textContent = dailyWords[wordIndex];
 
+  // Also set the same word in the lock screen word bar
+  // so both display the same daily prompt
+  var lockWord = document.getElementById('lock-daily-word');
+  if (lockWord) {
+    lockWord.textContent = dailyWords[wordIndex];
+  }
+
 
   // --- UPLOAD COUNT (animated counter) ---
   // Source: Upload count is placeholder data for demonstration purposes.

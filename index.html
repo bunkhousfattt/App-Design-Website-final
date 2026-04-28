@@ -20,29 +20,59 @@
        LOCK SCREEN
        Covers the entire page on first load.
        The user "uploads" to enter the site.
+       CSS keeps it fixed on top of everything (z-index: 9999).
+       JavaScript's unlockSite() fades it out and removes it.
        ================================================ -->
   <div id="lock-screen">
-    <img class="lock-logo" src="images/logoinverted.png" alt="INSPIRED">
+
+    <!-- Logo text above the window — white, large -->
+      <img src="images/logoinverted.png" alt="INSPIRED" class="header-logo">
+
+    <!-- The Windows 95-style dialog window -->
     <div class="lock-window">
+
+      <!-- Grey title bar: "Upload to see posts" -->
       <div class="lock-titlebar">Upload to see posts</div>
+
+      <!-- Lighter sub-bar: the instruction line -->
+      <div class="lock-subtitle">Create your art based on the word</div>
+
+      <!-- Blue strip showing today's daily word -->
+      <!-- JavaScript sets the text of this span (same word as the banner) -->
+      <div class="lock-word-bar">
+        <span id="lock-daily-word" class="lock-pixel-word">&#8226;&#8226;&#8226;</span>
+      </div>
+
+      <!-- Two upload options: label on top, icon button below -->
       <div class="lock-body">
-        <div class="lock-buttons">
-          <button class="lock-btn" onclick="unlockSite()">
+
+        <div class="lock-option">
+          <span class="lock-option-label">From Library</span>
+          <button class="lock-icon-btn" onclick="unlockSite()">
             <img src="images/album.svg" alt="From Library">
-            From Library
-          </button>
-          <button class="lock-btn" onclick="unlockSite()">
-            <img src="images/camera.svg" alt="Take Photo">
-            Take Photo
           </button>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <div class="lock-option">
+          <span class="lock-option-label">Take Photo</span>
+          <button class="lock-icon-btn" onclick="unlockSite()">
+            <img src="images/camera.svg" alt="Take Photo">
+          </button>
+        </div>
+
+      </div><!-- end lock-body -->
+
+    </div><!-- end lock-window -->
+
+  </div><!-- end lock-screen -->
 
 
   <!-- ================================================
        NAVIGATION BAR
+       <nav> is a semantic HTML tag — tells the browser
+       this is the main site menu.
+       Uses position: relative + absolute child to
+       truly centre the links regardless of logo width.
        ================================================ -->
   <nav id="main-nav">
 
@@ -56,7 +86,7 @@
       <a href="#" class="nav-link"        data-section="profile" onclick="showSection('profile')">Profile</a>
     </div>
 
-    <div class="nav-right">
+    <div class="nav-left">
       <button class="about-btn"     onclick="showSection('about')">About &gt;</button>
       <button class="hamburger-btn" onclick="openMobileMenu()">&#8801;</button>
     </div>
@@ -67,6 +97,8 @@
   <!-- ================================================
        BANNER
        Lives OUTSIDE all sections so it is always visible.
+       Previous version had it inside Explore — moved here
+       so Friends, Profile, About all share the same banner.
        ================================================ -->
   <div class="banner">
     <span id="current-date">Loading...</span>
@@ -85,7 +117,10 @@
 
 
   <!-- ================================================
-       MAIN — wraps all page sections
+       MAIN — wraps all page sections.
+       <main> is a required semantic tag for accessibility.
+       Only the section with class "active-section" shows.
+       JavaScript swaps that class when nav is clicked.
        ================================================ -->
   <main>
 
@@ -93,10 +128,12 @@
     <!-- ==========================================
          SECTION 1: EXPLORE
          3-column gallery grid of all public posts.
+         JavaScript builds the cards from artworkData.
          ========================================== -->
     <section id="section-explore" class="page-section active-section">
       <div class="section-content">
         <h1 class="section-title">Explore</h1>
+        <!-- JavaScript fills this div with art cards. See buildGallery() in script.js -->
         <div class="gallery-grid" id="gallery-grid"></div>
       </div>
     </section>
@@ -106,10 +143,12 @@
          SECTION 2: FRIENDS
          Single centred column of posts from people
          the user follows. One post per row, centred.
+         JavaScript builds cards from friendsData.
          ========================================== -->
     <section id="section-friends" class="page-section">
       <div class="section-content">
         <h1 class="section-title">Friends</h1>
+        <!-- JavaScript fills this div. See buildFriendsFeed() in script.js -->
         <div class="friends-feed" id="friends-feed"></div>
       </div>
     </section>
@@ -121,6 +160,7 @@
            - Your Profile (photo, stats, calendar)
            - Friends (add/remove friends)
            - Settings and Privacy (edit name, bio, etc.)
+         showProfileTab() in script.js switches between them.
          ========================================== -->
     <section id="section-profile" class="page-section">
       <div class="section-content">
@@ -128,6 +168,7 @@
         <h1 class="section-title">Profile</h1>
 
         <!-- Tab buttons — look like Windows 95 folder tabs -->
+        <!-- data-tab matches the tab name used in showProfileTab() in script.js -->
         <div class="profile-tabs">
           <button class="profile-tab active-tab" data-tab="your-profile" onclick="showProfileTab('your-profile')">Your Profile</button>
           <button class="profile-tab"            data-tab="friends-list" onclick="showProfileTab('friends-list')">Friends</button>
@@ -138,7 +179,7 @@
         <div class="tab-panel active-tab-panel" id="tab-your-profile">
           <div class="profile-inner-box">
 
-            <!-- Profile picture box -->
+            <!-- Profile picture box — swap the placeholder div for an <img> when ready -->
             <div class="profile-pic-box">
               <div class="profile-pic-placeholder">[ photo ]</div>
             </div>
@@ -153,6 +194,8 @@
 
               <div class="profile-stat-row">
                 <span class="stat-label">Profile Privacy:</span>
+                <!-- Clicking this toggles between Private / Public — satisfies the
+                     "user-driven interactivity" assignment requirement -->
                 <span class="stat-value clickable-value" id="privacy-value" onclick="togglePrivacy()">Private</span>
               </div>
 
@@ -165,7 +208,7 @@
 
             <h2 class="uploads-heading">Your Uploads</h2>
 
-            <!-- Calendar -->
+            <!-- Calendar built by buildCalendar() in script.js -->
             <div class="calendar-box" id="calendar-box"></div>
 
           </div>
@@ -177,7 +220,7 @@
 
             <!-- List of current friends — each has a Remove button -->
             <div class="friend-list" id="friend-list">
-              <!-- Example friends -->
+              <!-- These are example friends — removeFriend() deletes them -->
               <div class="friend-list-item">
                 <span class="friend-name">inkman82</span>
                 <button class="win95-btn small-btn" onclick="removeFriend(this)">Remove</button>
@@ -198,7 +241,7 @@
               <button class="win95-btn" onclick="addFriend()">Add Friend</button>
             </div>
 
-            <!-- Feedback message after adding -->
+            <!-- Feedback message after adding (hidden until addFriend() runs) -->
             <p class="friend-feedback" id="friend-feedback"></p>
 
           </div>
@@ -215,21 +258,23 @@
 
             <div class="setting-row">
               <label class="setting-label" for="bio-input">Bio</label>
+              <!-- textarea = multi-line text box -->
               <textarea id="bio-input" class="win95-input win95-textarea" placeholder="Tell people about yourself..."></textarea>
             </div>
 
             <div class="setting-row">
               <label class="setting-label" for="privacy-select">Profile Visibility</label>
+              <!-- select = dropdown menu. option = each choice inside it -->
               <select id="privacy-select" class="win95-input">
                 <option value="private">Private</option>
                 <option value="public">Public</option>
               </select>
             </div>
 
-            <!-- Save Changes button -->
+            <!-- Save button calls saveSettings() in script.js -->
             <button class="win95-btn save-btn" onclick="saveSettings()">Save Changes</button>
 
-            <!-- Confirmation message after saving -->
+            <!-- Shows a confirmation message after saving -->
             <p class="save-feedback" id="save-feedback"></p>
 
           </div>
