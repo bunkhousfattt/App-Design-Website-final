@@ -83,7 +83,7 @@ nav#main-nav {
   padding: 10px 26px;
   cursor: pointer;
   border: 2px solid;
-  border-color: #6699cc var(--dark-gray) var(--dark-gray) #6699cc;
+  border-color: #ffffff var(--dark-gray) var(--dark-gray) #ffffff;
 }
 
 .about-btn:hover {
