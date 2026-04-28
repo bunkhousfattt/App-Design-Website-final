@@ -1,21 +1,36 @@
+/* =====================================================
+   STYLE.CSS — All the visual styling for INSPIRED
+   ===================================================== */
+
+
+/* =====================================================
+   CSS VARIABLES — Our Colour Palette
+   ===================================================== */
 :root {
-  --gray:       #c0c0c0;
-  --lighter-grey:#d9d9d9;
-  --dark-gray:  #808080;
-  --white:      #ffffff;
-  --black:      #000000;
-  --banner-bg:  #2b6cb0;
-  --blue-btn:   #80AFE1;
-  --content-bg: #ffffff;
-  --card-hover: #264b8a;
+  --gray:         #c0c0c0;   /* Windows 95 silver — page background, nav bar */
+  --lighter-grey: #d9d9d9;   /* Slightly lighter silver — content box backgrounds */
+  --dark-gray:    #808080;   /* Used for shadow side of Win95 borders */
+  --white:        #ffffff;   /* Highlight side of borders, card backgrounds */
+  --black:        #000000;   /* Main text colour */
+  --banner-bg:    #2b6cb0;   /* The steel-blue banner strip */
+  --blue-btn:     #80AFE1;   /* Nav link hover and About button colour */
+  --card-hover:   #264b8a;   /* Border colour when hovering a card */
 }
 
+
+/* =====================================================
+   RESET — Remove browser defaults
+   ===================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+
+/* =====================================================
+   BODY — The whole page
+   ===================================================== */
 body {
   background-color: var(--gray);
   font-family: 'Jersey 15', Arial, sans-serif;
@@ -24,6 +39,10 @@ body {
   font-size: 18px;
 }
 
+
+/* =====================================================
+   NAVIGATION BAR
+   ===================================================== */
 nav#main-nav {
   position: relative;
   display: flex;
@@ -34,11 +53,13 @@ nav#main-nav {
   border-bottom: 2px solid var(--dark-gray);
 }
 
+/* Logo image wrapper (top-left) */
 .nav-logo {
   cursor: default;
   user-select: none;
 }
 
+/* The actual logo image */
 .header-logo {
   height: 70px;
   width: auto;
@@ -46,16 +67,19 @@ nav#main-nav {
   display: block;
 }
 
+/* The Explore / Friends / Profile box */
 .nav-links {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   border: 2px solid;
+  /* Windows 95 INSET border */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   padding: 2px;
 }
 
+/* Individual nav link */
 .nav-link {
   text-decoration: none;
   color: var(--black);
@@ -66,6 +90,7 @@ nav#main-nav {
   cursor: pointer;
 }
 
+/* Active nav link (the page you're currently on) */
 .nav-link.active {
   background-color: var(--gray);
 }
@@ -75,6 +100,7 @@ nav#main-nav {
   color: var(--white);
 }
 
+/* The blue "About >" button — top right */
 .about-btn {
   background-color: var(--blue-btn);
   color: var(--white);
@@ -83,7 +109,8 @@ nav#main-nav {
   padding: 10px 26px;
   cursor: pointer;
   border: 2px solid;
-  border-color: #ffffff var(--dark-gray) var(--dark-gray) #ffffff;
+  /* Windows 95 RAISED border */
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
 }
 
 .about-btn:hover {
@@ -91,9 +118,10 @@ nav#main-nav {
 }
 
 .about-btn:active {
-  border-color: var(--dark-gray) #6699cc #6699cc var(--dark-gray);
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
+/* Hamburger ≡ button — hidden on desktop, shown on mobile */
 .hamburger-btn {
   display: none;
   background-color: var(--gray);
@@ -106,6 +134,10 @@ nav#main-nav {
   font-family: Arial, sans-serif;
 }
 
+
+/* =====================================================
+   MOBILE SLIDE-IN MENU
+   ===================================================== */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -123,10 +155,12 @@ nav#main-nav {
   transition: transform 0.2s ease;
 }
 
+/* JavaScript adds this class to slide the menu into view */
 .mobile-menu.open {
   transform: translateX(0);
 }
 
+/* The ✕ close button */
 .close-btn {
   align-self: flex-start;
   background-color: var(--gray);
@@ -139,6 +173,7 @@ nav#main-nav {
   margin-bottom: 8px;
 }
 
+/* Links inside the mobile menu */
 .mobile-nav-link {
   text-decoration: none;
   color: var(--black);
@@ -156,9 +191,13 @@ nav#main-nav {
   color: var(--white);
 }
 
+
+/* =====================================================
+   BANNER (the blue strip always visible below the nav)
+   ===================================================== */
 .banner {
   background-color: var(--banner-bg);
-  color: #ffffff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -167,19 +206,22 @@ nav#main-nav {
   min-height: 110px;
 }
 
+/* Date text — left side */
 #current-date {
   font-size: 30px;
-  font-style: normal;
   font-weight: 400;
   min-width: 180px;
 }
 
+/* The big daily prompt word (centre) */
 .pixel-word {
   font-family: 'Jersey 15', monospace;
   font-size: 140px;
   letter-spacing: 3px;
+  line-height: 1;
 }
 
+/* Upload count — right side */
 #upload-count {
   font-size: 30px;
   font-weight: 400;
@@ -187,6 +229,10 @@ nav#main-nav {
   text-align: right;
 }
 
+
+/* =====================================================
+   PAGE SECTIONS
+   ===================================================== */
 .page-section {
   display: none;
 }
@@ -195,36 +241,27 @@ nav#main-nav {
   display: block;
 }
 
+/* The grey box that wraps content inside every section */
 .section-content {
   background-color: var(--lighter-grey);
   margin: 24px;
   padding: 32px;
   border: 2px solid;
+  /* INSET border */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
+/* Section heading e.g. "Explore", "Friends", "Profile" */
 .section-title {
   font-size: 60px;
   font-weight: 400;
   margin-bottom: 28px;
 }
 
-.coming-soon {
-  text-align: center;
-  padding: 60px 20px;
-  color: #444;
-}
 
-.coming-soon h2 {
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 16px;
-}
-
-.coming-soon p {
-  font-size: 18px;
-}
-
+/* =====================================================
+   EXPLORE PAGE — 3-column gallery grid
+   ===================================================== */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -232,6 +269,7 @@ nav#main-nav {
   align-items: start;
 }
 
+/* Individual art card */
 .art-card {
   background-color: var(--white);
   overflow: hidden;
@@ -245,6 +283,7 @@ nav#main-nav {
   border-color: var(--card-hover);
 }
 
+/* Image inside the card */
 .art-card img {
   width: 100%;
   height: auto;
@@ -252,6 +291,7 @@ nav#main-nav {
   object-fit: contain;
 }
 
+/* Shown when imageSrc is empty (placeholder box) */
 .art-placeholder {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -264,6 +304,7 @@ nav#main-nav {
   letter-spacing: 2px;
 }
 
+/* Bottom bar of each card: username left, time right */
 .art-info {
   display: flex;
   justify-content: space-between;
@@ -273,59 +314,408 @@ nav#main-nav {
   border-top: 1px solid var(--dark-gray);
 }
 
-.art-time {
-  color: #555;
+.art-username { font-weight: bold; }
+.art-time     { color: #555; }
+
+
+/* =====================================================
+   FRIENDS PAGE — Single centred column of posts
+
+   Unlike Explore's 3-column grid, Friends shows one
+   card at a time, centred in the page.
+   ===================================================== */
+.friends-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
 }
 
-/* Tablets */
-@media (max-width: 768px) {
-  .pixel-word {
-    font-size: 56px;
-  }
-  #current-date,
-  #upload-count {
-    font-size: 18px;
-    min-width: 120px;
-  }
+/* A single friend post card */
+.friend-card {
+  width: 55%;
+  background-color: var(--white);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  transition: border-color 0.15s ease;
 }
 
-/* Phones */
-@media (max-width: 600px) {
-  .nav-links,
-  .about-btn {
-    display: none;
-  }
-  .hamburger-btn {
-    display: block;
-  }
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  .pixel-word {
-    font-size: 48px;
-    letter-spacing: 3px;
-  }
-  .banner {
-    padding: 16px 20px;
-    min-height: 90px;
-  }
-  #current-date,
-  #upload-count {
-    font-size: 14px;
-    min-width: 90px;
-  }
-  .art-card img,
-  .art-placeholder {
-    height: auto;
-  }
-  .section-content {
-    margin: 14px;
-    padding: 22px;
-  }
+.friend-card:hover {
+  border-color: var(--card-hover);
 }
 
-/* ── LOCK SCREEN ── */
+/* Image fills the full card width, natural height */
+.friend-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.friend-card .art-placeholder {
+  aspect-ratio: 4 / 3;
+  /* Landscape placeholder for friend cards */
+}
+
+/* Same info bar style as gallery cards */
+.friend-card .art-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--gray);
+  font-size: 17px;
+  border-top: 1px solid var(--dark-gray);
+}
+
+
+/* =====================================================
+   PROFILE PAGE — Tab system + content panels
+   ===================================================== */
+
+/* Row of tab buttons (Your Profile / Friends / Settings) */
+.profile-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+/* Individual tab button */
+.profile-tab {
+  background-color: var(--lighter-grey);
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  padding: 10px 22px;
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--black);
+  position: relative;
+  bottom: -2px;
+}
+
+/* The currently selected tab */
+.profile-tab.active-tab {
+  background-color: var(--lighter-grey);
+  border-bottom-color: var(--lighter-grey);
+  z-index: 1;
+}
+
+.profile-tab:hover:not(.active-tab) {
+  background-color: var(--gray);
+}
+
+/* Tab content panels — hidden by default */
+.tab-panel {
+  display: none;
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  background-color: var(--lighter-grey);
+  padding: 28px;
+}
+
+/* Only the active panel is shown */
+.tab-panel.active-tab-panel {
+  display: block;
+}
+
+/* The lighter inner box inside each tab panel */
+.profile-inner-box {
+  background-color: #e8e8e8;
+  border: 2px solid;
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* The profile picture box — square placeholder */
+.profile-pic-box {
+  width: 220px;
+}
+
+.profile-pic-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: var(--gray);
+  border: 2px solid;
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 14px;
+}
+
+/* The rows: Username: / Profile Privacy: / Upload Streak: */
+.profile-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.profile-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 22px;
+}
+
+/* Clickable value — e.g. "Private" toggles to "Public" */
+.clickable-value {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #00a;
+}
+
+.clickable-value:hover {
+  color: var(--card-hover);
+}
+
+/* "Your Uploads" heading above the calendar */
+.uploads-heading {
+  font-size: 28px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+/* The calendar box */
+.calendar-box {
+  width: 100%;
+  max-width: 520px;
+  background-color: var(--gray);
+  border: 2px solid;
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  padding: 20px 24px;
+  font-size: 16px;
+}
+
+/* "Month YYYY" heading inside the calendar */
+.calendar-month-heading {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+/* The grid of day cells */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+/* Day-of-week headers: Mon Tue Wed Thu Fri Sat Sun */
+.cal-header {
+  font-size: 14px;
+  padding: 4px 0;
+  color: #444;
+}
+
+/* Individual day number */
+.cal-day {
+  padding: 5px 2px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #00a;
+  /* Blue like a link — days are clickable to see that day's upload */
+  text-decoration: underline;
+}
+
+.cal-day:hover {
+  background-color: var(--blue-btn);
+  color: var(--white);
+}
+
+/* Days outside the current month (e.g. the trailing 29 30 31) */
+.cal-day.other-month {
+  color: #999;
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Empty cells used to push the first day to the right column */
+.cal-empty {
+  padding: 5px 2px;
+}
+
+
+/* =====================================================
+   PROFILE — FRIENDS LIST TAB
+   ===================================================== */
+
+/* The list of friends with Remove buttons */
+.friend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* One friend row: name on left, Remove button on right */
+.friend-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: var(--lighter-grey);
+  border: 2px solid;
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  font-size: 20px;
+}
+
+/* The Add Friend input + button row */
+.add-friend-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 8px;
+}
+
+/* Feedback text after adding a friend */
+.friend-feedback {
+  font-size: 18px;
+  min-height: 24px;
+}
+
+/* =====================================================
+   SHARED FORM ELEMENTS (used in Profile tabs)
+   ===================================================== */
+
+/* Windows 95 style input fields */
+.win95-input {
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 20px;
+  padding: 8px 12px;
+  background-color: var(--white);
+  border: 2px solid;
+  /* INSET border */
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  color: var(--black);
+  width: 100%;
+}
+
+.win95-input:focus {
+  outline: none;
+  border-color: var(--card-hover) var(--white) var(--white) var(--card-hover);
+}
+
+/* Multi-line textarea (bio field) */
+.win95-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Windows 95 style button */
+.win95-btn {
+  font-family: 'Jersey 15', Arial, sans-serif;
+  font-size: 20px;
+  padding: 8px 20px;
+  background-color: var(--gray);
+  border: 2px solid;
+  border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
+  cursor: pointer;
+  color: var(--black);
+  white-space: nowrap;
+}
+
+.win95-btn:hover {
+  background-color: var(--blue-btn);
+  color: var(--white);
+}
+
+.win95-btn:active {
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+}
+
+/* Smaller variant for "Remove" buttons in friend list */
+.small-btn {
+  font-size: 16px;
+  padding: 5px 14px;
+}
+
+
+/* =====================================================
+   PROFILE — SETTINGS TAB
+   ===================================================== */
+
+/* A single setting row: label above, input below */
+.setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.setting-label {
+  font-size: 20px;
+}
+
+/* The "Save Changes" button — sits below all the settings */
+.save-btn {
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+/* Confirmation text after saving */
+.save-feedback {
+  font-size: 18px;
+  color: #006600;  /* Green = success */
+  min-height: 24px;
+}
+
+
+/* =====================================================
+   ABOUT PAGE
+   ===================================================== */
+.about-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 680px;
+}
+
+.about-text {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* The "How it works" info box */
+.about-infobox {
+  border: 2px solid;
+  border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
+  background-color: var(--gray);
+  margin-top: 8px;
+}
+
+.about-infobox-title {
+  background-color: var(--banner-bg);
+  color: var(--white);
+  font-size: 20px;
+  padding: 6px 14px;
+}
+
+.about-list {
+  list-style: disc;
+  padding: 16px 16px 16px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+
+
+/* =====================================================
+   LOCK SCREEN
+   ===================================================== */
 #lock-screen {
   position: fixed;
   inset: 0;
@@ -340,17 +730,20 @@ nav#main-nav {
   transition: opacity 0.4s ease;
 }
 
+/* When JavaScript adds "hidden" — fade it out */
 #lock-screen.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
+/* The big logo at the top of the lock screen */
 .lock-logo {
   width: 390px;
   height: auto;
   image-rendering: pixelated;
 }
 
+/* The Windows 95-style dialog box */
 .lock-window {
   width: 520px;
   border: 2px solid;
@@ -358,18 +751,17 @@ nav#main-nav {
   background: var(--gray);
 }
 
+/* The blue title bar of the dialog */
 .lock-titlebar {
   background: var(--banner-bg);
   color: var(--white);
   font-family: 'Jersey 15', Arial, sans-serif;
   font-size: 20px;
   padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   user-select: none;
 }
 
+/* Inside the dialog box */
 .lock-body {
   padding: 28px 32px 32px;
   display: flex;
@@ -378,18 +770,13 @@ nav#main-nav {
   gap: 24px;
 }
 
-.lock-prompt {
-  font-family: 'Jersey 15', Arial, sans-serif;
-  font-size: 22px;
-  color: var(--black);
-  align-self: flex-start;
-}
-
+/* The two upload buttons side by side */
 .lock-buttons {
   display: flex;
   gap: 20px;
 }
 
+/* Each upload option button */
 .lock-btn {
   background: var(--gray);
   border: 2px solid;
@@ -407,11 +794,6 @@ nav#main-nav {
   transition: background 0.1s;
 }
 
-.lock-btn svg {
-  width: 72px;
-  height: 72px;
-}
-
 .lock-btn img {
   width: 72px;
   height: 72px;
@@ -426,21 +808,105 @@ nav#main-nav {
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
+
+/* =====================================================
+   RESPONSIVE DESIGN — Media Queries
+   ===================================================== */
+
+/* TABLET: 768px wide or narrower */
+@media (max-width: 768px) {
+
+  .pixel-word {
+    font-size: 56px;
+  }
+
+  #current-date,
+  #upload-count {
+    font-size: 18px;
+    min-width: 120px;
+  }
+
+  /* Friend cards take up more width on tablets */
+  .friend-card {
+    width: 80%;
+  }
+
+}
+
+/* MOBILE: 600px wide or narrower */
 @media (max-width: 600px) {
+
+  /* Hide desktop nav links and About button */
+  .nav-links,
+  .about-btn {
+    display: none;
+  }
+
+  /* Show hamburger ≡ button */
+  .hamburger-btn {
+    display: block;
+  }
+
+  /* 2 columns on mobile for Explore grid */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .pixel-word {
+    font-size: 48px;
+    letter-spacing: 3px;
+  }
+
+  .banner {
+    padding: 16px 20px;
+    min-height: 90px;
+  }
+
+  #current-date,
+  #upload-count {
+    font-size: 14px;
+    min-width: 90px;
+  }
+
+  .section-content {
+    margin: 14px;
+    padding: 22px;
+  }
+
+  .section-title {
+    font-size: 40px;
+  }
+
+  /* Friend cards go full width on mobile */
+  .friend-card {
+    width: 100%;
+  }
+
+  /* Profile tabs stack better on small screens */
+  .profile-tab {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  /* Lock screen adjusts for small screens */
   .lock-logo {
     width: 240px;
   }
+
   .lock-window {
     width: 320px;
   }
+
   .lock-btn {
     width: 126px;
     font-size: 17px;
     padding: 18px 12px;
   }
-  .lock-btn svg,
+
   .lock-btn img {
     width: 52px;
     height: 52px;
   }
+
 }

@@ -4,52 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INSPIRED</title>
+
+  <!-- Our two fonts from Google Fonts -->
+  <!-- Jersey 15 = all general UI text (nav, cards, body copy) -->
+  <!-- Pixelify Sans = the big daily prompt word (CROWN, SHADOW, etc.) -->
   <link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="lock-screen">
-  <img class="lock-logo" src="images/logoinverted.png" alt="INSPIRED">
-  <div class="lock-window">
-    <div class="lock-titlebar">
-      Upload to see posts
-      <span class="lock-titlebar-dot"></span>
-    </div>
-    <div class="lock-body">
-      <div class="lock-buttons">
-        <button class="lock-btn" onclick="unlockSite()">
-         <img src="images/album.svg" alt="From Library">
-        From Library
-        </button>
 
-        <button class="lock-btn" onclick="unlockSite()">
-        <img src="images/camera.svg" alt="Take Photo">
-        Take Photo
-        </button>
+  <!-- ================================================
+       LOCK SCREEN
+       Covers the entire page on first load.
+       The user "uploads" to enter the site.
+       ================================================ -->
+  <div id="lock-screen">
+    <img class="lock-logo" src="images/logoinverted.png" alt="INSPIRED">
+    <div class="lock-window">
+      <div class="lock-titlebar">Upload to see posts</div>
+      <div class="lock-body">
+        <div class="lock-buttons">
+          <button class="lock-btn" onclick="unlockSite()">
+            <img src="images/album.svg" alt="From Library">
+            From Library
+          </button>
+          <button class="lock-btn" onclick="unlockSite()">
+            <img src="images/camera.svg" alt="Take Photo">
+            Take Photo
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+
+  <!-- ================================================
+       NAVIGATION BAR
+       ================================================ -->
   <nav id="main-nav">
 
     <div class="nav-logo">
-      <img src="images\logo.png" alt="App Logo" class="header-logo">    </div>
+      <img src="images/logo.png" alt="INSPIRED" class="header-logo">
+    </div>
 
     <div class="nav-links" id="desktop-links">
       <a href="#" class="nav-link active" data-section="explore" onclick="showSection('explore')">Explore</a>
-      <a href="#" class="nav-link"         data-section="friends" onclick="showSection('friends')">Friends</a>
-      <a href="#" class="nav-link"         data-section="profile" onclick="showSection('profile')">Profile</a>
+      <a href="#" class="nav-link"        data-section="friends" onclick="showSection('friends')">Friends</a>
+      <a href="#" class="nav-link"        data-section="profile" onclick="showSection('profile')">Profile</a>
     </div>
 
-    <button class="about-btn" onclick="showSection('about')">About &gt;</button>
-
-    <button class="hamburger-btn" id="hamburger-btn" onclick="openMobileMenu()">&#8801;</button>
+    <div class="nav-right">
+      <button class="about-btn"     onclick="showSection('about')">About &gt;</button>
+      <button class="hamburger-btn" onclick="openMobileMenu()">&#8801;</button>
+    </div>
 
   </nav>
 
+
+  <!-- ================================================
+       BANNER
+       Lives OUTSIDE all sections so it is always visible.
+       ================================================ -->
+  <div class="banner">
+    <span id="current-date">Loading...</span>
+    <span id="daily-word"   class="pixel-word">&#8226;&#8226;&#8226;</span>
+    <span id="upload-count">0 Uploads</span>
+  </div>
+
+
+  <!-- Mobile slide-in drawer (off-screen until hamburger is clicked) -->
   <div class="mobile-menu" id="mobile-menu">
     <button class="close-btn" onclick="closeMobileMenu()">&#10005;</button>
     <a href="#" class="mobile-nav-link" onclick="showSection('explore'); closeMobileMenu()">Explore</a>
@@ -57,41 +83,198 @@
     <a href="#" class="mobile-nav-link" onclick="showSection('profile');  closeMobileMenu()">Profile</a>
   </div>
 
-  <main>
-    <section id="section-explore" class="page-section active-section">
-      <div class="banner">
-        <span id="current-date">Loading...</span>
-        <span id="daily-word" class="pixel-word">&#8226;&#8226;&#8226;</span>
-        <span id="upload-count">0 Uploads</span>
-      </div>
 
+  <!-- ================================================
+       MAIN — wraps all page sections
+       ================================================ -->
+  <main>
+
+
+    <!-- ==========================================
+         SECTION 1: EXPLORE
+         3-column gallery grid of all public posts.
+         ========================================== -->
+    <section id="section-explore" class="page-section active-section">
       <div class="section-content">
         <h1 class="section-title">Explore</h1>
-        <div class="gallery-grid" id="gallery-grid">
-        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
       </div>
     </section>
 
+
+    <!-- ==========================================
+         SECTION 2: FRIENDS
+         Single centred column of posts from people
+         the user follows. One post per row, centred.
+         ========================================== -->
     <section id="section-friends" class="page-section">
-      <div class="section-content coming-soon">
-        <h2>Friends</h2>
-        <p>Coming soon — this will show artwork from people you follow.</p>
+      <div class="section-content">
+        <h1 class="section-title">Friends</h1>
+        <div class="friends-feed" id="friends-feed"></div>
       </div>
     </section>
 
+
+    <!-- ==========================================
+         SECTION 3: PROFILE
+         Has three sub-tabs:
+           - Your Profile (photo, stats, calendar)
+           - Friends (add/remove friends)
+           - Settings and Privacy (edit name, bio, etc.)
+         ========================================== -->
     <section id="section-profile" class="page-section">
-      <div class="section-content coming-soon">
-        <h2>Profile</h2>
-        <p>Coming soon — edit your profile, add and remove friends.</p>
+      <div class="section-content">
+
+        <h1 class="section-title">Profile</h1>
+
+        <!-- Tab buttons — look like Windows 95 folder tabs -->
+        <div class="profile-tabs">
+          <button class="profile-tab active-tab" data-tab="your-profile" onclick="showProfileTab('your-profile')">Your Profile</button>
+          <button class="profile-tab"            data-tab="friends-list" onclick="showProfileTab('friends-list')">Friends</button>
+          <button class="profile-tab"            data-tab="settings"     onclick="showProfileTab('settings')">Settings and Privacy</button>
+        </div>
+
+        <!-- ---- TAB 1: YOUR PROFILE ---- -->
+        <div class="tab-panel active-tab-panel" id="tab-your-profile">
+          <div class="profile-inner-box">
+
+            <!-- Profile picture box -->
+            <div class="profile-pic-box">
+              <div class="profile-pic-placeholder">[ photo ]</div>
+            </div>
+
+            <!-- Three info rows: label | value -->
+            <div class="profile-stats">
+
+              <div class="profile-stat-row">
+                <span class="stat-label">Username:</span>
+                <span class="stat-value">@exampleUser</span>
+              </div>
+
+              <div class="profile-stat-row">
+                <span class="stat-label">Profile Privacy:</span>
+                <span class="stat-value clickable-value" id="privacy-value" onclick="togglePrivacy()">Private</span>
+              </div>
+
+              <div class="profile-stat-row">
+                <span class="stat-label">Upload Streak:</span>
+                <span class="stat-value">18 days</span>
+              </div>
+
+            </div>
+
+            <h2 class="uploads-heading">Your Uploads</h2>
+
+            <!-- Calendar -->
+            <div class="calendar-box" id="calendar-box"></div>
+
+          </div>
+        </div>
+
+        <!-- ---- TAB 2: FRIENDS LIST ---- -->
+        <div class="tab-panel" id="tab-friends-list">
+          <div class="profile-inner-box">
+
+            <!-- List of current friends — each has a Remove button -->
+            <div class="friend-list" id="friend-list">
+              <!-- Example friends -->
+              <div class="friend-list-item">
+                <span class="friend-name">inkman82</span>
+                <button class="win95-btn small-btn" onclick="removeFriend(this)">Remove</button>
+              </div>
+              <div class="friend-list-item">
+                <span class="friend-name">Just-Passing-Thru737</span>
+                <button class="win95-btn small-btn" onclick="removeFriend(this)">Remove</button>
+              </div>
+              <div class="friend-list-item">
+                <span class="friend-name">ezuntimmy</span>
+                <button class="win95-btn small-btn" onclick="removeFriend(this)">Remove</button>
+              </div>
+            </div>
+
+            <!-- Add a new friend by typing their username -->
+            <div class="add-friend-row">
+              <input type="text" id="add-friend-input" class="win95-input" placeholder="Enter username...">
+              <button class="win95-btn" onclick="addFriend()">Add Friend</button>
+            </div>
+
+            <!-- Feedback message after adding -->
+            <p class="friend-feedback" id="friend-feedback"></p>
+
+          </div>
+        </div>
+
+        <!-- ---- TAB 3: SETTINGS AND PRIVACY ---- -->
+        <div class="tab-panel" id="tab-settings">
+          <div class="profile-inner-box">
+
+            <div class="setting-row">
+              <label class="setting-label" for="display-name-input">Display Name</label>
+              <input type="text" id="display-name-input" class="win95-input" placeholder="@exampleUser">
+            </div>
+
+            <div class="setting-row">
+              <label class="setting-label" for="bio-input">Bio</label>
+              <textarea id="bio-input" class="win95-input win95-textarea" placeholder="Tell people about yourself..."></textarea>
+            </div>
+
+            <div class="setting-row">
+              <label class="setting-label" for="privacy-select">Profile Visibility</label>
+              <select id="privacy-select" class="win95-input">
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
+            </div>
+
+            <!-- Save Changes button -->
+            <button class="win95-btn save-btn" onclick="saveSettings()">Save Changes</button>
+
+            <!-- Confirmation message after saving -->
+            <p class="save-feedback" id="save-feedback"></p>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
+
+    <!-- ==========================================
+         SECTION 4: ABOUT
+         Short description of the site.
+         ========================================== -->
     <section id="section-about" class="page-section">
-      <div class="section-content coming-soon">
-        <h2>About INSPIRED</h2>
-        <p>Coming soon — a short description of what this site is all about.</p>
+      <div class="section-content">
+
+        <h1 class="section-title">About INSPIRED</h1>
+
+        <div class="about-panel">
+          <p class="about-text">
+            INSPIRED is a daily drawing challenge community. Every day, a new prompt word is chosen — and artists of all levels share their interpretation of it.
+          </p>
+          <p class="about-text">
+            Upload your artwork each day to build your streak, discover other artists on Explore, and follow friends to see their daily work in your Friends feed.
+          </p>
+          <p class="about-text">
+            No likes. No algorithms. No pressure — just art, every day.
+          </p>
+
+          <!-- A small Windows 95 style info box -->
+          <div class="about-infobox">
+            <div class="about-infobox-title">How it works</div>
+            <ul class="about-list">
+              <li>A new word is revealed each day at midnight</li>
+              <li>Upload your drawing before the day ends</li>
+              <li>Browse Explore to see everyone's take on the prompt</li>
+              <li>Follow artists whose work you love</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </section>
+
+
   </main>
 
   <script src="script.js"></script>
