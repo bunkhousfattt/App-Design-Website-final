@@ -1,129 +1,74 @@
-/* =====================================================
-   STYLE.CSS — All the visual styling for INSPIRED
-   
-   CSS works like this:
-     selector { property: value; }
-   
-   The selector picks which HTML element(s) to style.
-   The property/value pairs change how they look.
-   ===================================================== */
 
-
-/* =====================================================
-   CSS VARIABLES — Our Colour Palette
-   
-   Define colours once here, reuse them everywhere
-   with var(--name). Change one value = updates everywhere.
-   ===================================================== */
 :root {
-  --gray:         #c0c0c0;   /* Windows 95 silver — page background, nav bar */
-  --lighter-grey: #d9d9d9;   /* Slightly lighter silver — content box backgrounds */
-  --dark-gray:    #808080;   /* Used for shadow side of Win95 borders */
-  --white:        #ffffff;   /* Highlight side of borders, card backgrounds */
-  --black:        #000000;   /* Main text colour */
-  --banner-bg:    #2b6cb0;   /* The steel-blue banner strip */
-  --blue-btn:     #80AFE1;   /* Nav link hover and About button colour */
-  --card-hover:   #264b8a;   /* Border colour when hovering a card */
+  --gray:         #c0c0c0;
+  --lighter-grey: #d9d9d9;
+  --dark-gray:    #808080;
+  --white:        #ffffff;
+  --black:        #000000;
+  --banner-bg:    #2b6cb0;
+  --blue-btn:     #80AFE1;
+  --card-hover:   #264b8a;
 }
 
-
-/* =====================================================
-   RESET — Remove browser defaults
-   Browsers add their own spacing. This clears it so
-   we start from scratch.
-   ===================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* box-sizing: border-box means padding/border are
-     included in an element's width, not added on top.
-     Makes sizing much more predictable. */
 }
 
-
-/* =====================================================
-   BODY — The whole page
-   ===================================================== */
 body {
   background-color: var(--gray);
   font-family: 'Jersey 15', Arial, sans-serif;
-  /* 'Jersey 15' loads from Google Fonts.
-     Arial is the fallback if it doesn't load. */
   color: var(--black);
   min-height: 100vh;
-  /* 100vh = 100% of the visible browser window height */
   font-size: 18px;
 }
 
-
-/* =====================================================
-   NAVIGATION BAR
-   ===================================================== */
 nav#main-nav {
   position: relative;
-  /* position: relative lets child elements use
-     position: absolute relative to this nav bar.
-     That's how we get the links perfectly centred. */
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* space-between: logo on left, About button on right.
-     The links sit absolutely in the middle (see .nav-links). */
-
   padding: 22px 32px;
   background-color: var(--gray);
   border-bottom: 2px solid var(--dark-gray);
 }
 
-/* Logo image wrapper (top-left) */
 .nav-logo {
   cursor: default;
   user-select: none;
-  /* user-select: none prevents accidentally highlighting/selecting the logo */
 }
 
-/* The actual logo image */
 .header-logo {
-  height: 70px;    /* Controls how tall it appears */
-  width: auto;     /* Keeps the original proportions */
+  height: 70px;
+  width: auto;
   object-fit: contain;
-  display: block;  /* Removes a tiny gap below inline images */
+  display: block;
 }
 
-/* The Explore / Friends / Profile box
-   Uses absolute positioning to sit exactly in the centre
-   of the nav regardless of what's on the left or right. */
+/* nav links */
 .nav-links {
   position: absolute;
-  /* absolute = positioned relative to the nearest parent
-     that has position: relative — which is nav#main-nav */
   left: 50%;
   transform: translateX(-50%);
-  /* left: 50% moves the LEFT EDGE to the centre.
-     translateX(-50%) then shifts it back left by half
-     its own width — so the CENTRE of the box is centred. */
-
   display: flex;
   border: 2px solid;
-  /* Windows 95 INSET border: top/left dark, bottom/right white = looks recessed */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   padding: 2px;
 }
 
-/* Individual nav link */
+/* nav link */
 .nav-link {
-  text-decoration: none;   /* Remove underline from links */
+  text-decoration: none;
   color: var(--black);
   padding: 10px 32px;
   font-size: 25px;
   display: block;
-  white-space: nowrap;     /* Don't wrap text onto a new line */
+  white-space: nowrap;
   cursor: pointer;
 }
 
-/* Active nav link (the page you're currently on) */
+/* active nav link */
 .nav-link.active {
   background-color: var(--gray);
 }
@@ -133,7 +78,7 @@ nav#main-nav {
   color: var(--white);
 }
 
-/* The blue "About >" button — top right */
+/* about button */
 .about-btn {
   background-color: var(--blue-btn);
   color: var(--white);
@@ -142,21 +87,18 @@ nav#main-nav {
   padding: 10px 26px;
   cursor: pointer;
   border: 2px solid;
-  /* Windows 95 RAISED border: top/left white, bottom/right dark = looks clickable */
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
 }
 
 .about-btn:hover {
   filter: brightness(1.15);
-  /* Makes the button slightly brighter on hover */
 }
 
 .about-btn:active {
-  /* When clicked, flip the border to look "pressed in" */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
-/* Hamburger ≡ button — hidden on desktop, shown on mobile */
+/* hamburger button */
 .hamburger-btn {
   display: none;
   background-color: var(--gray);
@@ -170,38 +112,29 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   MOBILE SLIDE-IN MENU
-   Off-screen by default. JavaScript adds "open" class
-   to slide it in. CSS handles the animation.
-   ===================================================== */
+/* mobile menu */
 .mobile-menu {
-  position: fixed;   /* Stays put even when the user scrolls */
+  position: fixed;
   top: 0;
   right: 0;
   width: 260px;
-  height: 100%;      /* Full screen height */
+  height: 100%;
   background-color: var(--gray);
   border-right: 3px solid var(--dark-gray);
   z-index: 1000;
-  /* z-index: things with higher numbers appear on top.
-     1000 ensures the menu floats over all page content. */
   padding: 16px;
   display: flex;
-  flex-direction: column;   /* Stack items vertically */
-  gap: 12px;                /* Space between items */
+  flex-direction: column;
+  gap: 12px;
   transform: translateX(100%);
-  /* Starts 100% of its own width to the LEFT — off screen */
   transition: transform 0.2s ease;
-  /* When transform changes, animate it over 0.2 seconds */
 }
 
-/* JavaScript adds this class to slide the menu into view */
 .mobile-menu.open {
-  transform: translateX(0);   /* Slides to its normal on-screen position */
+  transform: translateX(0);
 }
 
-/* The ✕ close button */
+/* close button */
 .close-btn {
   align-self: flex-start;
   background-color: var(--gray);
@@ -214,7 +147,7 @@ nav#main-nav {
   margin-bottom: 8px;
 }
 
-/* Links inside the mobile menu */
+/* mobile nav links */
 .mobile-nav-link {
   text-decoration: none;
   color: var(--black);
@@ -233,12 +166,10 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   BANNER (the blue strip always visible below the nav)
-   ===================================================== */
+/* banner */
 .banner {
   background-color: var(--banner-bg);
-  color: var(--white);  /* All text inside is white */
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -247,16 +178,14 @@ nav#main-nav {
   min-height: 110px;
 }
 
-/* Date text — left side */
+/* date */
 #current-date {
   font-size: 30px;
   font-weight: 400;
   min-width: 180px;
-  /* min-width stops the layout from shifting when the
-     date text changes length slightly */
 }
 
-/* The big daily prompt word (centre) */
+/* pixel word */
 .pixel-word {
   font-family: 'Jersey 15', monospace;
   font-size: 140px;
@@ -264,7 +193,7 @@ nav#main-nav {
   line-height: 1;
 }
 
-/* Upload count — right side */
+/* upload count */
 #upload-count {
   font-size: 30px;
   font-weight: 400;
@@ -273,12 +202,7 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   PAGE SECTIONS
-   
-   All sections are hidden by default (display: none).
-   JavaScript adds "active-section" to show one.
-   ===================================================== */
+/* page sections */
 .page-section {
   display: none;
 }
@@ -287,17 +211,16 @@ nav#main-nav {
   display: block;
 }
 
-/* The grey box that wraps content inside every section */
+/* section content */
 .section-content {
   background-color: var(--lighter-grey);
   margin: 24px;
   padding: 32px;
   border: 2px solid;
-  /* INSET border — slightly sunken look */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
-/* Section heading e.g. "Explore", "Friends", "Profile" */
+/* section title */
 .section-title {
   font-size: 60px;
   font-weight: 400;
@@ -305,24 +228,18 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   EXPLORE PAGE — 3-column gallery grid
-   ===================================================== */
+/* explore page */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 equal columns. 1fr = "one fraction of available space" */
-  gap: 24px;         /* Space between ALL cards */
+  gap: 24px;
   align-items: start;
-  /* align-items: start means tall images don't stretch
-     their neighbours — each card is only as tall as it needs */
 }
 
-/* Individual art card */
+/* art card */
 .art-card {
   background-color: var(--white);
   overflow: hidden;
-  /* Clips the image to stay inside the card border */
   cursor: pointer;
   border: 2px solid;
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
@@ -333,20 +250,18 @@ nav#main-nav {
   border-color: var(--card-hover);
 }
 
-/* Image inside the card */
+/* art card image */
 .art-card img {
   width: 100%;
-  height: auto;      /* Height scales with the image's natural proportions */
+  height: auto;
   display: block;
   object-fit: contain;
 }
 
-/* Shown when imageSrc is empty (placeholder box) */
+/* art placeholder */
 .art-placeholder {
   width: 100%;
   aspect-ratio: 3 / 4;
-  /* aspect-ratio keeps it a consistent portrait shape
-     regardless of how wide the column is */
   background: linear-gradient(135deg, #999 0%, #bbb 40%, #999 100%);
   display: flex;
   align-items: center;
@@ -356,7 +271,7 @@ nav#main-nav {
   letter-spacing: 2px;
 }
 
-/* Bottom bar of each card: username left, time right */
+/* art info */
 .art-info {
   display: flex;
   justify-content: space-between;
@@ -366,27 +281,20 @@ nav#main-nav {
   border-top: 1px solid var(--dark-gray);
 }
 
-.art-time     { color: #555; }
+.art-time { color: #555; }
 
 
-/* =====================================================
-   FRIENDS PAGE — Single centred column of posts
-   
-   Unlike Explore's 3-column grid, Friends shows one
-   card at a time, centred in the page.
-   ===================================================== */
+/* friends page */
 .friends-feed {
   display: flex;
-  flex-direction: column;  /* Stack cards vertically */
-  align-items: center;     /* Centre each card horizontally */
-  gap: 28px;               /* Space between cards */
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
 }
 
-/* A single friend post card */
+/* friend card */
 .friend-card {
   width: 55%;
-  /* Cards take up 55% of the content box — centred by
-     the align-items: center on .friends-feed */
   background-color: var(--white);
   overflow: hidden;
   cursor: pointer;
@@ -399,7 +307,6 @@ nav#main-nav {
   border-color: var(--card-hover);
 }
 
-/* Image fills the full card width, natural height */
 .friend-card img {
   width: 100%;
   height: auto;
@@ -409,10 +316,8 @@ nav#main-nav {
 
 .friend-card .art-placeholder {
   aspect-ratio: 4 / 3;
-  /* Landscape placeholder for friend cards */
 }
 
-/* Same info bar style as gallery cards */
 .friend-card .art-info {
   display: flex;
   justify-content: space-between;
@@ -423,18 +328,16 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   PROFILE PAGE — Tab system + content panels
-   ===================================================== */
+/* profile page */
 
-/* Row of tab buttons (Your Profile / Friends / Settings) */
+/* profile tabs */
 .profile-tabs {
   display: flex;
   gap: 0;
   margin-bottom: 0;
 }
 
-/* Individual tab button */
+/* profile tab */
 .profile-tab {
   background-color: var(--lighter-grey);
   border: 2px solid;
@@ -446,26 +349,20 @@ nav#main-nav {
   color: var(--black);
   position: relative;
   bottom: -2px;
-  /* bottom: -2px overlaps the tab slightly onto the panel
-     below it — the classic browser-tab visual trick */
 }
 
-/* The currently selected tab */
+/* active tab */
 .profile-tab.active-tab {
   background-color: var(--lighter-grey);
   border-bottom-color: var(--lighter-grey);
-  /* Making the bottom border match the background "removes"
-     it, connecting the tab visually to the panel below */
   z-index: 1;
-  /* z-index: 1 brings the active tab in front of the panel
-     border so the bottom line disappears cleanly */
 }
 
 .profile-tab:hover:not(.active-tab) {
   background-color: var(--gray);
 }
 
-/* Tab content panels — hidden by default */
+/* tab panels */
 .tab-panel {
   display: none;
   border: 2px solid;
@@ -474,12 +371,12 @@ nav#main-nav {
   padding: 28px;
 }
 
-/* Only the active panel is shown */
+/* active tab panel */
 .tab-panel.active-tab-panel {
   display: block;
 }
 
-/* The lighter inner box inside each tab panel */
+/* profile inner box */
 .profile-inner-box {
   background-color: #e8e8e8;
   border: 2px solid;
@@ -491,7 +388,7 @@ nav#main-nav {
   gap: 20px;
 }
 
-/* The profile picture box — square placeholder */
+/* profile pic */
 .profile-pic-box {
   width: 220px;
 }
@@ -509,7 +406,7 @@ nav#main-nav {
   font-size: 14px;
 }
 
-/* The rows: Username: / Profile Privacy: / Upload Streak: */
+/* profile stats */
 .profile-stats {
   display: flex;
   flex-direction: column;
@@ -526,26 +423,25 @@ nav#main-nav {
   font-size: 22px;
 }
 
-/* Clickable value — e.g. "Private" toggles to "Public" */
+/* clickable value */
 .clickable-value {
   cursor: pointer;
   text-decoration: underline;
   color: #00a;
-  /* Underline + blue = classic hyperlink style hint */
 }
 
 .clickable-value:hover {
   color: var(--card-hover);
 }
 
-/* "Your Uploads" heading above the calendar */
+/* uploads heading */
 .uploads-heading {
   font-size: 28px;
   font-weight: 400;
   margin-top: 8px;
 }
 
-/* The calendar box */
+/* calendar */
 .calendar-box {
   width: 100%;
   max-width: 520px;
@@ -556,35 +452,33 @@ nav#main-nav {
   font-size: 16px;
 }
 
-/* "Month YYYY" heading inside the calendar */
+/* calendar heading */
 .calendar-month-heading {
   font-size: 20px;
   margin-bottom: 14px;
 }
 
-/* The grid of day cells */
+/* calendar grid */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  /* 7 equal columns — one per day of the week */
   gap: 4px;
   text-align: center;
 }
 
-/* Day-of-week headers: Mon Tue Wed Thu Fri Sat Sun */
+/* calendar headers */
 .cal-header {
   font-size: 14px;
   padding: 4px 0;
   color: #444;
 }
 
-/* Individual day number */
+/* calendar day */
 .cal-day {
   padding: 5px 2px;
   font-size: 15px;
   cursor: pointer;
   color: #00a;
-  /* Blue like a link — days are clickable to see that day's upload */
   text-decoration: underline;
 }
 
@@ -593,24 +487,22 @@ nav#main-nav {
   color: var(--white);
 }
 
-/* Days outside the current month (e.g. the trailing 29 30 31) */
+/* other month days */
 .cal-day.other-month {
   color: #999;
   text-decoration: none;
   cursor: default;
 }
 
-/* Empty cells used to push the first day to the right column */
+/* empty cells */
 .cal-empty {
   padding: 5px 2px;
 }
 
 
-/* =====================================================
-   PROFILE — FRIENDS LIST TAB
-   ===================================================== */
+/* friends list tab */
 
-/* The list of friends with Remove buttons */
+/* friend list */
 .friend-list {
   display: flex;
   flex-direction: column;
@@ -619,7 +511,7 @@ nav#main-nav {
   max-width: 400px;
 }
 
-/* One friend row: name on left, Remove button on right */
+/* friend list item */
 .friend-list-item {
   display: flex;
   justify-content: space-between;
@@ -631,7 +523,7 @@ nav#main-nav {
   font-size: 20px;
 }
 
-/* The Add Friend input + button row */
+/* add friend */
 .add-friend-row {
   display: flex;
   gap: 10px;
@@ -640,24 +532,21 @@ nav#main-nav {
   margin-top: 8px;
 }
 
-/* Feedback text after adding a friend */
+/* friend feedback */
 .friend-feedback {
   font-size: 18px;
-  min-height: 24px;  /* Reserves space so the layout doesn't jump */
+  min-height: 24px;
 }
 
-/* =====================================================
-   SHARED FORM ELEMENTS (used in Profile tabs)
-   ===================================================== */
+/* form elements */
 
-/* Windows 95 style input fields */
+/* win95 input */
 .win95-input {
   font-family: 'Jersey 15', Arial, sans-serif;
   font-size: 20px;
   padding: 8px 12px;
   background-color: var(--white);
   border: 2px solid;
-  /* INSET border — looks sunken, like a text field should */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   color: var(--black);
   width: 100%;
@@ -666,18 +555,15 @@ nav#main-nav {
 .win95-input:focus {
   outline: none;
   border-color: var(--card-hover) var(--white) var(--white) var(--card-hover);
-  /* Blue border on focus so the user knows it's active */
 }
 
-/* Multi-line textarea (bio field) */
+/* textarea */
 .win95-textarea {
   resize: vertical;
-  /* resize: vertical lets the user drag to make it taller,
-     but not wider (width is controlled by the layout) */
   min-height: 90px;
 }
 
-/* Windows 95 style button */
+/* win95 button */
 .win95-btn {
   font-family: 'Jersey 15', Arial, sans-serif;
   font-size: 20px;
@@ -696,22 +582,19 @@ nav#main-nav {
 }
 
 .win95-btn:active {
-  /* Flip border to look pressed */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
 }
 
-/* Smaller variant for "Remove" buttons in friend list */
+/* small button */
 .small-btn {
   font-size: 16px;
   padding: 5px 14px;
 }
 
 
-/* =====================================================
-   PROFILE — SETTINGS TAB
-   ===================================================== */
+/* settings tab */
 
-/* A single setting row: label above, input below */
+/* setting row */
 .setting-row {
   display: flex;
   flex-direction: column;
@@ -724,24 +607,21 @@ nav#main-nav {
   font-size: 20px;
 }
 
-/* The "Save Changes" button — sits below all the settings */
+/* save button */
 .save-btn {
   margin-top: 8px;
   align-self: flex-start;
-  /* align-self: flex-start stops it stretching full width */
 }
 
-/* Confirmation text after saving */
+/* save feedback */
 .save-feedback {
   font-size: 18px;
-  color: #006600;  /* Green = success */
+  color: #006600;
   min-height: 24px;
 }
 
 
-/* =====================================================
-   ABOUT PAGE
-   ===================================================== */
+/* about page */
 .about-panel {
   display: flex;
   flex-direction: column;
@@ -754,7 +634,7 @@ nav#main-nav {
   line-height: 1.5;
 }
 
-/* The "How it works" info box */
+/* about infobox */
 .about-infobox {
   border: 2px solid;
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
@@ -779,40 +659,27 @@ nav#main-nav {
 }
 
 
-/* =====================================================
-   LOCK SCREEN
-   
-   position: fixed + inset: 0 = covers the ENTIRE screen.
-   z-index: 9999 = appears above everything.
-   JavaScript fades it out and removes it on upload click.
-   ===================================================== */
+/* lock screen */
 #lock-screen {
   position: fixed;
   inset: 0;
-  /* inset: 0 is shorthand for top:0; right:0; bottom:0; left:0 */
   z-index: 9999;
   background: rgba(0, 0, 0, 0.88);
-  /* Dark blue-grey tint — matches the blurred site behind it */
   backdrop-filter: blur(18px);
-  /* Blurs whatever is visible behind the overlay */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
   transition: opacity 0.4s ease;
-  /* Smooth fade when JavaScript adds the "hidden" class */
 }
 
-/* When JavaScript adds "hidden" — fade out */
 #lock-screen.hidden {
   opacity: 0;
   pointer-events: none;
-  /* pointer-events: none = invisible to mouse clicks
-     so the page behind is usable immediately */
 }
 
-/* "INSPIRED 👁" text above the dialog window */
+/* lock logo text */
 .lock-logo-text {
   color: var(--white);
   font-family: 'Jersey 15', Arial, sans-serif;
@@ -821,18 +688,16 @@ nav#main-nav {
   user-select: none;
 }
 
-/* The main dialog window */
+/* lock window */
 .lock-window {
   width: 500px;
   background: var(--gray);
   border: 2px solid;
-  /* RAISED border — the window looks lifted off the dark background */
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
   overflow: hidden;
-  /* overflow: hidden clips the blue word bar flush to the window edges */
 }
 
-/* Grey title bar: "Upload to see posts" */
+/* lock titlebar */
 .lock-titlebar {
   background-color: var(--lighter-grey);
   color: var(--black);
@@ -843,7 +708,7 @@ nav#main-nav {
   user-select: none;
 }
 
-/* Slightly lighter sub-bar: "Create your art based on the word" */
+/* lock subtitle */
 .lock-subtitle {
   background-color: #e8e8e8;
   color: var(--black);
@@ -854,7 +719,7 @@ nav#main-nav {
   border-bottom: 2px solid var(--dark-gray);
 }
 
-/* Blue strip showing today's daily word */
+/* lock word bar */
 .lock-word-bar {
   background-color: var(--banner-bg);
   padding: 12px 0;
@@ -862,7 +727,7 @@ nav#main-nav {
   border-bottom: 2px solid var(--dark-gray);
 }
 
-/* The big word inside the blue strip (e.g. "CROWN") */
+/* lock pixel word */
 .lock-pixel-word {
   font-family: 'Jersey 15', monospace;
   font-size: 80px;
@@ -871,7 +736,7 @@ nav#main-nav {
   letter-spacing: 4px;
 }
 
-/* Body area: the two upload options side by side */
+/* lock body */
 .lock-body {
   display: flex;
   justify-content: center;
@@ -879,7 +744,7 @@ nav#main-nav {
   padding: 24px 28px 28px;
 }
 
-/* Each upload column: label on top, square icon button below */
+/* lock option */
 .lock-option {
   display: flex;
   flex-direction: column;
@@ -887,20 +752,19 @@ nav#main-nav {
   gap: 10px;
 }
 
-/* "From Library" / "Take Photo" labels */
+/* lock option labels */
 .lock-option-label {
   font-family: 'Jersey 15', Arial, sans-serif;
   font-size: 22px;
   color: var(--black);
 }
 
-/* Large square icon-only button */
+/* lock icon button */
 .lock-icon-btn {
   width: 180px;
   height: 180px;
   background-color: var(--gray);
   border: 2px solid;
-  /* INSET border = looks like a recessed panel / tray */
   border-color: var(--dark-gray) var(--white) var(--white) var(--dark-gray);
   cursor: pointer;
   display: flex;
@@ -914,7 +778,6 @@ nav#main-nav {
   height: 90px;
   object-fit: contain;
   image-rendering: pixelated;
-  /* Keeps pixel-art icons crisp when scaled up */
 }
 
 .lock-icon-btn:hover {
@@ -922,20 +785,13 @@ nav#main-nav {
 }
 
 .lock-icon-btn:active {
-  /* Flip border to look pressed in when clicked */
   border-color: var(--white) var(--dark-gray) var(--dark-gray) var(--white);
 }
 
 
-/* =====================================================
-   RESPONSIVE DESIGN — Media Queries
-   
-   "IF the screen is this wide, THEN use these styles."
-   We write mobile overrides at the bottom so they
-   take priority over the desktop styles above.
-   ===================================================== */
+/* responsive */
 
-/* TABLET: 768px wide or narrower */
+/* tablet */
 @media (max-width: 768px) {
 
   .pixel-word {
@@ -948,28 +804,24 @@ nav#main-nav {
     min-width: 120px;
   }
 
-  /* Friend cards take up more width on tablets */
   .friend-card {
     width: 80%;
   }
 
 }
 
-/* MOBILE: 600px wide or narrower */
+/* mobile */
 @media (max-width: 600px) {
 
-  /* Hide desktop nav links and About button */
   .nav-links,
   .about-btn {
     display: none;
   }
 
-  /* Show hamburger ≡ button */
   .hamburger-btn {
     display: block;
   }
 
-  /* 2 columns on mobile for Explore grid */
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -1000,18 +852,15 @@ nav#main-nav {
     font-size: 40px;
   }
 
-  /* Friend cards go full width on mobile */
   .friend-card {
     width: 100%;
   }
 
-  /* Profile tabs stack better on small screens */
   .profile-tab {
     font-size: 16px;
     padding: 8px 12px;
   }
 
-  /* Lock screen adjusts for small screens */
   .lock-logo-text {
     font-size: 28px;
   }
